@@ -6,7 +6,7 @@
 
 	<groupId>com.ey</groupId>
 	<artifactId>test-manaj</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>test-manaj</name>
@@ -255,6 +255,36 @@
 				<plugin>
 					<artifactId>maven-project-info-reports-plugin</artifactId>
 					<version>3.0.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>xml-maven-plugin</artifactId>
+					<version>1.0.2</version>
+					<executions>
+						<execution>
+							<phase>install</phase>
+							<goals>
+								<goal>transform</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<transformationSets>
+							<transformationSet>
+								<dir>${project.build.directory}/checkstyle</dir>
+								<stylesheet>src/test/resources/checkstyle/checkstyle-author.xsl</stylesheet>
+								<includes>checkstyle-result.xml</includes>
+								<outputDir>${project.build.directory}/checkstyle</outputDir>
+								<fileMappers>
+									<fileMapper
+											implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
+										<pattern>\.xml$</pattern>
+										<replacement>.html</replacement>
+									</fileMapper>
+								</fileMappers>
+							</transformationSet>
+						</transformationSets>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
