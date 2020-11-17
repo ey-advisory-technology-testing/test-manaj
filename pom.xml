@@ -6,7 +6,7 @@
 
 	<groupId>com.ey</groupId>
 	<artifactId>test-manaj</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>test-manaj</name>
@@ -116,6 +116,14 @@
 			<artifactId>mockserver-netty</artifactId>
 			<version>5.11.1</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>0.8.5</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -144,98 +152,45 @@
 					<groupId>org.jacoco</groupId>
 					<artifactId>jacoco-maven-plugin</artifactId>
 					<version>0.8.5</version>
-					<configuration>
-						<outputDirectory>${project.build.directory}/jacoco</outputDirectory>
-					</configuration>
 					<executions>
+					<execution>
+						<id>instrument</id>
+						<phase>process-test-classes</phase>
+						<goals>
+							<goal>instrument</goal>
+						</goals>
+					</execution>
+					<execution>
+					<id>restore-instrumented-classes</id>
+					<phase>test</phase>
+					<goals>
+						<goal>restore-instrumented-classes</goal>
+					</goals>
+					</execution>
 						<execution>
-							<goals>
-								<goal>prepare-agent</goal>
-							</goals>
-						</execution>
-
-						<execution>
-							<id>report</id>
-							<phase>prepare-package</phase>
+							<!-- Ensures that the code coverage report for unit tests is created
+                           after unit tests have been run. -->
+							<id>post-unit-test</id>
+							<phase>test</phase>
 							<goals>
 								<goal>report</goal>
 							</goals>
 							<configuration>
-								<includes>
-									<include>**/business/extract/**</include>
-									<include>**/business/peripherals/*</include>
-									<include>**/business/report/**</include>
-									<include>**/business/validate/**</include>
-									<include>**/application/contextmanager/**</include>
-								</includes>
-							</configuration>
-						</execution>
-
-						<execution>
-							<id>jacoco-check</id>
-							<goals>
-								<goal>check</goal>
-							</goals>
-							<configuration>
-								<includes>
-									<include>**/business/extract/**</include>
-									<include>**/business/peripherals/*</include>
-									<include>**/business/report/**</include>
-									<include>**/business/validate/**</include>
-									<include>**/application/contextmanager/**</include>
-								</includes>
-								<rules>
-									<rule>
-										<element>PACKAGE</element>
-										<limits>
-											<limit>
-												<counter>BRANCH</counter>
-												<value>COVEREDRATIO</value>
-												<minimum>0.50</minimum>
-											</limit>
-										</limits>
-									</rule>
-								</rules>
+								<!-- Sets the output directory for the code coverage report. -->
+								<outputDirectory>$/jacoco</outputDirectory>
 							</configuration>
 						</execution>
 					</executions>
 				</plugin>
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId> <!-- surefire plugin version managed by Spring Boot -->
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.0.0-M3</version>
 					<configuration>
-						<skipTests>true</skipTests>
+						<systemPropertyVariables>
+							<jacoco-agent.destfile>$/jacoco.exec</jacoco-agent.destfile>
+						</systemPropertyVariables>
 					</configuration>
-					<executions>
-						<execution>
-							<id>unit-tests</id>
-							<phase>test</phase>
-							<goals>
-								<goal>test</goal>
-							</goals>
-							<configuration>
-								<skipTests>false</skipTests>
-								<includes>
-									<include>**/application/**/*Test.java</include>
-									<include>**/business/**/*Test.java</include>
-								</includes>
-							</configuration>
-						</execution>
-						<execution>
-							<id>BDD-Scenarios</id>
-							<phase>test</phase>
-							<goals>
-								<goal>test</goal>
-							</goals>
-							<configuration>
-								<skipTests>false</skipTests>
-								<includes>
-									<include>**/tests/*ETL*.java</include>
-								</includes>
-							</configuration>
-						</execution>
-					</executions>
 				</plugin>
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
