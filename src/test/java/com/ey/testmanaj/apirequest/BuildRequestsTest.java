@@ -1,4 +1,4 @@
-package com.ey.testManaj.apirequest;
+package com.ey.testmanaj.apirequest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

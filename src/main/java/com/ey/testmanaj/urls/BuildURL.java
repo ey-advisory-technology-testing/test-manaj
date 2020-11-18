@@ -1,8 +1,8 @@
-package com.ey.testManaj.urls;
+package com.ey.testmanaj.urls;
 
 import java.io.IOException;
 
-import com.ey.testManaj.App;
+import com.ey.testmanaj.App;
 import com.ey.beans.SessionBean;
 import com.ey.utilities.PropertyReader;
 import com.fasterxml.jackson.core.JsonProcessingException;

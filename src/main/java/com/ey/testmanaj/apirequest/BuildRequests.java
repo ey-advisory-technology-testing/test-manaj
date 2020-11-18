@@ -1,8 +1,8 @@
-package com.ey.testManaj.apirequest;
+package com.ey.testmanaj.apirequest;
 
 import java.io.IOException;
 
-import com.ey.testManaj.connection.Authenticator;
+import com.ey.testmanaj.connection.Authenticator;
 import com.google.api.client.http.ByteArrayContent;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;

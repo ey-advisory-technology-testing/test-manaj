@@ -1,4 +1,4 @@
-package com.ey.testManaj;
+package com.ey.testmanaj;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -22,10 +22,10 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.ey.testManaj.apirequest.BuildRequests;
-import com.ey.testManaj.apirequest.Headers;
-import com.ey.testManaj.connection.Authenticator;
-import com.ey.testManaj.urls.BuildURL;
+import com.ey.testmanaj.apirequest.BuildRequests;
+import com.ey.testmanaj.apirequest.Headers;
+import com.ey.testmanaj.connection.Authenticator;
+import com.ey.testmanaj.urls.BuildURL;
 import com.ey.beans.TestInstanceBean;
 import com.ey.beans.TestRunBean;
 import com.ey.beans.TestRunStepBean;
@@ -409,18 +409,6 @@ public class App {
         String cookie = "";
 
         BuildURL.setEnv();
-        GenericUrl authURL = BuildURL.getGenericURL("isAuthenticated");
-
-        try {
-            HttpRequest req = buildRequest.createGetRequest(authURL);
-            req.setReadTimeout(20 * 60000);
-            req.setConnectTimeout(20 * 60000);
-
-            HttpResponse res = req.execute();
-            res.getRequest().getHeaders();
-        } catch (HttpResponseException e) {
-            e.printStackTrace();
-        }
 
         cookie = authenticate();
 

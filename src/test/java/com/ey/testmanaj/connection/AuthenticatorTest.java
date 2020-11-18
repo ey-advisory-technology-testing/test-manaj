@@ -1,4 +1,4 @@
-package com.ey.testManaj.connection;
+package com.ey.testmanaj.connection;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;

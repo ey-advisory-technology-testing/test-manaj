@@ -1,4 +1,4 @@
-package com.ey.testManaj.apirequest;
+package com.ey.testmanaj.apirequest;
 
 import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpRequest;

@@ -1,4 +1,4 @@
-package com.ey.testManaj;
+package com.ey.testmanaj;
 
 import java.util.LinkedHashMap;
 

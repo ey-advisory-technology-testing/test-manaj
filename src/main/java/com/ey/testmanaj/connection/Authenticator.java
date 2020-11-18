@@ -1,6 +1,6 @@
-package com.ey.testManaj.connection;
+package com.ey.testmanaj.connection;
 
-import com.ey.testManaj.transport.Transport;
+import com.ey.testmanaj.transport.Transport;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
 
