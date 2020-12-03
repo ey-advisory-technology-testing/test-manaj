@@ -339,11 +339,11 @@ ExecuteApp.updateALMForTestCase(testCaseName, steps, runProperties, System.getPr
 ```
 
 
-## Executing in TestManaJ
+## Executing in TestmanaJ
 * The only thing left to do is call the method then validate results in your third-party test managment tool.
 
 
-## Contributing to TestManaJ
+## Contributing to TestmanaJ
 
 To contribute to TestManaJ, follow these steps:
 
