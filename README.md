@@ -1,4 +1,4 @@
-# TestManaJ
+# TestmanaJ
 <!---##
 ![GitHub repo size](https://img.shields.io/github/repo-size/scottydocs/README-template.md)
 ![GitHub contributors](https://img.shields.io/github/contributors/scottydocs/README-template.md)
@@ -6,7 +6,7 @@
 
 
 
-TestManaJ is a automation utility that performs the process of injecting test results into third-party test management tools, such as ALM or JIRA.
+TestmanaJ is a automation utility that performs the process of injecting test results into third-party test management tools, such as ALM or JIRA.
 
 
 TestmanaJ's detailed and customizable data-driven properties *save the user time* in manually uploading automation results and facilitates a **single** location for manual and automated test execution reporting.
