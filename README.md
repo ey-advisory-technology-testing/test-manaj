@@ -31,7 +31,7 @@ Ensure you have met the following minimum requirements:
 * You use an IDE
 
 
-## Installing TestManaJ
+## Installing TestmanaJ
 
 To install TestManaJ, follow these steps:
 
@@ -40,7 +40,7 @@ To install TestManaJ, follow these steps:
 * Finally, download the ALM resources folder and place on your local. This directory can be placed anywhere on your native project or windows explorer.
 
 
-## Configuring TestManaJ
+## Configuring TestmanaJ
 Below is a list of test run, and run step properties available for setting:
 
 
