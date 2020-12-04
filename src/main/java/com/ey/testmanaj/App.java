@@ -16,6 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.http.HttpStatus;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -155,7 +156,7 @@ public class App {
      * @throws IOException the io exception
      */
     @SuppressWarnings({ "unchecked"})
-    private String getHeader(String cookie) throws IOException {
+    public String getHeader(String cookie) throws IOException {
         String sessionXML = BuildURL.buildSessionXML();
         GenericUrl sessionn = BuildURL.getGenericURL("getSession");
         ArrayList<String> headers = new ArrayList<String>();
@@ -177,7 +178,7 @@ public class App {
      * @return the encoded user credentials
      * @throws ConfigurationException the Configuration exception
      */
-    private String setLoginCredentials() throws ConfigurationException  {
+    public String setLoginCredentials() throws ConfigurationException  {
         String auth;
         try {
             String username = objConfig.readValue("username");
@@ -198,16 +199,15 @@ public class App {
     /**
      * Create test set.
      *
-     * @return the create test set http response code
      * @throws IOException                  the io exception
      * @throws ConfigurationException       the configuration exception
      */
     public void createTestSet() throws IOException, ConfigurationException{
         XmlMapper xmlMapper = new XmlMapper();
 
-        String headers = isAuthenticated();
-
         findTestSetFolderID();
+
+        String headers = isAuthenticated();
 
         GenericUrl testSetURL = BuildURL.getGenericURL("createTestSet");
 
@@ -241,7 +241,6 @@ public class App {
      * Gets test set.
      *
      * @param headers the request headers
-     * @return the get test set http response code
      * @throws IOException the io exception
      */
     public void getTestSet(String headers) throws IOException {
@@ -305,6 +304,7 @@ public class App {
         GenericUrl testInstanceURL = BuildURL.getGenericURL("testInstance");
         TestInstanceBean testInstanceXml = new TestInstanceBean().createTestInstanceXML();
         String testInstanceXmlString = xmlMapper.writeValueAsString(testInstanceXml);
+
         boolean existingTestInstance = false;
         if(objConfig.readValue("always_create_new_tset_instance").equals("false")) {
             String cycleID = objTestInstance.readValue("cycle-id");
@@ -356,7 +356,7 @@ public class App {
      * @return the http request headers
      * @throws IOException the io exception
      */
-    private Object getSession(GenericUrl session, String sessionXml, String cookie) throws IOException {
+    public Object getSession(GenericUrl session, String sessionXml, String cookie) throws IOException {
 
         HttpRequest req = buildRequest.createPostRequest(session, sessionXml);
 
@@ -375,7 +375,7 @@ public class App {
      * @return the http request header/cookie
      * @throws ConfigurationException the Configuration Exception
      */
-    private String authenticate() throws ConfigurationException {
+    public String authenticate() throws ConfigurationException {
 
         String cookie = "";
         try {
@@ -404,7 +404,7 @@ public class App {
      * @throws IOException the io exception
      * @throws ConfigurationException the Configuration Exception
      */
-    private String isAuthenticated() throws IOException, ConfigurationException {
+    public String isAuthenticated() throws IOException, ConfigurationException {
 
         String cookie = "";
 
@@ -414,6 +414,7 @@ public class App {
 
         String c;
         c = getHeader(cookie);
+
         return c + ";" + cookie;
     }
 
@@ -654,7 +655,7 @@ public class App {
      * @throws SAXException the sax exception
      * @throws IOException the io exception
      */
-    private String getAttributeFromXMLResponse(String responseXml, String attribute)
+    public String getAttributeFromXMLResponse(String responseXml, String attribute)
             throws ParserConfigurationException, SAXException, IOException {
 
         String value = "";
@@ -922,7 +923,7 @@ public class App {
      * @throws Exception the exception
      */
     @SuppressWarnings("unused")
-    private void attachWithOctetStream(String filePath, String fileName) throws Exception {
+    public void attachWithOctetStream(String filePath, String fileName) throws Exception {
 
         String cookies = isAuthenticated();
 

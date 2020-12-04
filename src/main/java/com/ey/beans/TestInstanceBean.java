@@ -103,7 +103,7 @@ public class TestInstanceBean {
 	 * @param key the field key
 	 * @param value the field value
 	 */
-	private void addField(String key, String value) {
+	public void addField(String key, String value) {
 		Field field = new Field();
 		field.setName(key);
 		field.setValue(value);
@@ -115,7 +115,7 @@ public class TestInstanceBean {
 	 *
 	 * @throws IOException the io exception
 	 */
-	private void addFields() throws IOException {
+	public void addFields() throws IOException {
 		
 		Set<String> keys = reader.getAllKeys();
 		

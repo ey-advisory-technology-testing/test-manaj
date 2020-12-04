@@ -94,7 +94,7 @@ public class TestRunBean {
 	 * @param fieldName the field key
 	 * @param value the field value
 	 */
-	private void addFieldAndValue(String fieldName, String value) {
+	public void addFieldAndValue(String fieldName, String value) {
 		Field obj = new Field();
 		obj.setName(fieldName);
 		obj.setValue(value);
@@ -119,21 +119,21 @@ public class TestRunBean {
 		this.type = type;
 	}
 
-	private void addStatus(String Status) {
+	public void addStatus(String Status) {
 		Field status = new Field();
 		status.setName("status");
 		status.setValue(Status);
 		fields.add(status);
 	}
 	
-	private void addField(String key, String value) {
+	public void addField(String key, String value) {
 		Field field = new Field();
 		field.setName(key);
 		field.setValue(value);
 		fields.add(field);
 	}
 
-	private void addCreateFields() throws IOException {
+	public void addCreateFields() throws IOException {
 		
 		Set<String> keys = reader.getAllKeys();
 		
@@ -143,7 +143,7 @@ public class TestRunBean {
 	}
 	
 	
-	private void addUpdateFields(String status) {
+	public void addUpdateFields(String status) {
 		addStatus(status);
 	}
 }

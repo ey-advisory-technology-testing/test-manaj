@@ -81,7 +81,7 @@ public class PropertyReader {
 	 *
 	 * @return property file input stream
 	 */
-	private FileInputStream getPropFile() {
+	public FileInputStream getPropFile() {
 		FileInputStream fileInputStream;
 		try {
 			fileInputStream = new FileInputStream(new File(this.propFile));

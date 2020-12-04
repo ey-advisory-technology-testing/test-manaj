@@ -92,7 +92,7 @@ public class BuildURL {
 	 */
 	public static String getTestSetFolderURL() {
 
-		return baseURL + "rest/domains/" + domain + "/projects/" + project + "/test-set-folders";
+		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/" + project + "/test-set-folders";
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class BuildURL {
 	 */
 	public static String getTestRunURL() {
 
-		return baseURL + "rest/domains/" + domain + "/projects/" + project + "/runs";
+		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/" + project + "/runs";
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class BuildURL {
 	 */
 	public static String getProjectURL() {
 
-		return baseURL + "rest/domains/" + domain + "/projects/" + project;
+		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/" + project;
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class BuildURL {
 	 */
 	public static String getTestInstanceURL() {
 
-		return baseURL + "rest/domains/" + domain + "/projects/" + project + "/test-instances";
+		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/" + project + "/test-instances";
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class BuildURL {
 	 */
 	public static String createTestSet() {
 
-		return baseURL + "rest/domains/" + domain + "/projects/"  + project + "/test-sets";
+		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/"  + project + "/test-sets";
 	}
 
 
@@ -143,7 +143,7 @@ public class BuildURL {
 	 */
 	public static String getCreateTestRunURL() {
 
-		return baseURL + "rest/domains/" + domain + "/projects/" + project + "/runs";
+		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/" + project + "/runs";
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class BuildURL {
 	 */
 	public static String getTestsURL() {
 
-		return baseURL + "rest/domains/" + domain + "/projects/" + project + "/tests";
+		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/" + project + "/tests";
 	}
 
 }

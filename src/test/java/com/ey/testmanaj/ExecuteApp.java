@@ -8,7 +8,7 @@ public class ExecuteApp {
 
 	public static void main(String[] args) throws Exception {
 
-	    String testCaseName = "TC_19  Create a New Submission for a Full Application";
+	    String testCaseName = "Demo Test1";
 
         LinkedHashMap<String, String> runProperties = new LinkedHashMap<>();
         runProperties.put("attachment", "C:\\Users\\Manjunath.Purad\\OneDrive - EY\\Desktop\\EY I and A\\Image.JPG;C:\\Users\\Manjunath.Purad\\OneDrive - EY\\Desktop\\EY I and A\\Image - Copy.JPG");

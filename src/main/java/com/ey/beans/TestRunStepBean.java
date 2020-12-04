@@ -81,7 +81,7 @@ public class TestRunStepBean {
 	 * @param fieldName the field key
 	 * @param value the field value
 	 */
-	private void addFieldAndValue(String fieldName, String value) {
+	public void addFieldAndValue(String fieldName, String value) {
 		Field obj = new Field();
 		obj.setName(fieldName);
 		obj.setValue(value);
@@ -112,7 +112,7 @@ public class TestRunStepBean {
 	 *
 	 * @param status the status value
 	 */
-	private void addStatus(String status) {
+	public void addStatus(String status) {
 		Field obj = new Field();
 		obj.setName("status");
 		obj.setValue(status);
@@ -124,7 +124,7 @@ public class TestRunStepBean {
 	 *
 	 * @param name the name value
 	 */
-	private void addName(String name) {
+	public void addName(String name) {
 		Field obj = new Field();
 		obj.setName("name");
 		obj.setValue(name);
@@ -136,7 +136,7 @@ public class TestRunStepBean {
 	 *
 	 * @param status the status value
 	 */
-	private void addUpdateFields(String status) {
+	public void addUpdateFields(String status) {
 		addStatus(status);
 	}
 
