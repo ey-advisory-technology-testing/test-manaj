@@ -11,7 +11,7 @@ public class Transport {
 	
 	private static NetHttpTransport instance;
 	
-	private Transport() {
+	public Transport() {
 		
 	}
 
