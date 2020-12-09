@@ -1,10 +1,14 @@
 package com.ey.testmanaj.urls;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
+import com.ey.testmanaj.App;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.commons.lang.SystemUtils;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.nio.file.FileSystems;
+
+import static org.junit.Assert.*;
 
 public class BuildURLTest {
     @Test
@@ -60,7 +64,14 @@ public class BuildURLTest {
     }
 
     @Test
-    public void testGetGenericURL() {
+    public void testGetGenericURL() throws IOException {
+        new App(SystemUtils.getUserDir().toString(),
+                "src" + FileSystems.getDefault().getSeparator() +
+                "test" + FileSystems.getDefault().getSeparator() +
+                "resources" + FileSystems.getDefault().getSeparator() +
+                "testResources" + FileSystems.getDefault().getSeparator());
+        BuildURL.setEnv();
+        assertNotNull(BuildURL.getGenericURL("authentication"));
         assertNull(BuildURL.getGenericURL("https://example.org/example"));
     }
 

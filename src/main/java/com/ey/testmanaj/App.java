@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -61,6 +62,13 @@ public class App {
     private static PropertyReader objTestInstance;
     private static PropertyReader objTestRun;
     private static PropertyReader objTestRunStep;
+    public static String resourcesFilePath;
+
+    public static String getConfigFileRoot() {
+        return configFileRoot;
+    }
+
+    private static String configFileRoot;
 
     /**
      * Gets alm resources file path.
@@ -81,24 +89,20 @@ public class App {
     }
 
     /**
-     * The constant resourcesFilePath.
-     */
-    public static String resourcesFilePath;
-
-    /**
      * Sets path for all the alm sources.
      *
      * @param path the alm resurces path
      */
-    public App(String path){
+    public App(String path, String configFilesRoot){
+        this.configFileRoot = configFilesRoot;
         setResourcesFilePath(path);
         buildRequest = new BuildRequests();
         header = new Headers();
-        objConfig = new PropertyReader(getResourcesFilePath() + "\\resources\\configuration.properties");
-        objTestSet = new PropertyReader(getResourcesFilePath() + "\\resources\\test-set.properties");
-        objTestInstance = new PropertyReader(getResourcesFilePath() + "\\resources\\test-instance.properties");
-        objTestRun = new PropertyReader(getResourcesFilePath() + "\\resources\\test-run.properties");
-        objTestRunStep = new PropertyReader(getResourcesFilePath() + "\\resources\\test-run-step.properties");
+        objConfig = new PropertyReader(getResourcesFilePath() + FileSystems.getDefault().getSeparator() + configFilesRoot + "configuration.properties");
+        objTestSet = new PropertyReader(getResourcesFilePath() + FileSystems.getDefault().getSeparator() + configFilesRoot + "test-set.properties");
+        objTestInstance = new PropertyReader(getResourcesFilePath() + FileSystems.getDefault().getSeparator() + configFilesRoot + "test-instance.properties");
+        objTestRun = new PropertyReader(getResourcesFilePath() + FileSystems.getDefault().getSeparator() + configFilesRoot + "test-run.properties");
+        objTestRunStep = new PropertyReader(getResourcesFilePath() + FileSystems.getDefault().getSeparator() + configFilesRoot + "test-run-step.properties");
     }
 
     /**
@@ -159,7 +163,7 @@ public class App {
     public String getHeader(String cookie) throws IOException {
         String sessionXML = BuildURL.buildSessionXML();
         GenericUrl sessionn = BuildURL.getGenericURL("getSession");
-        ArrayList<String> headers = new ArrayList<String>();
+        ArrayList<String> headers = new ArrayList<>();
         Object a = getSession(sessionn, sessionXML, cookie);
         headers.addAll((ArrayList<String>) a);
         String c = "";
@@ -380,17 +384,12 @@ public class App {
         String cookie = "";
         try {
             GenericUrl gURL = BuildURL.getGenericURL("authentication");
-
             HttpRequest req = buildRequest.createPostRequest(gURL, "");
-
             String auth = setLoginCredentials();
             req.setHeaders(new HttpHeaders().set("Authorization", "Basic " + auth));
-
             HttpResponse res = req.execute();
             HttpHeaders headers = res.getHeaders();
-
             cookie = header.getCookies(headers);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -405,16 +404,11 @@ public class App {
      * @throws ConfigurationException the Configuration Exception
      */
     public String isAuthenticated() throws IOException, ConfigurationException {
-
         String cookie = "";
-
         BuildURL.setEnv();
-
         cookie = authenticate();
-
         String c;
         c = getHeader(cookie);
-
         return c + ";" + cookie;
     }
 
@@ -1039,6 +1033,11 @@ public class App {
         } catch (HttpResponseException e) {
             e.getLocalizedMessage();
         }
+    }
+
+    public static void updateTestCase(String testCaseName, LinkedHashMap<String, LinkedHashMap<String, String>> steps, LinkedHashMap<String, String> runProperties, String resourcesPath, String configFilesRoot) throws Exception {
+        App executeApp = new App(resourcesPath, configFilesRoot);
+        executeApp.updateTestResult(testCaseName, steps, runProperties);
     }
 
 }
