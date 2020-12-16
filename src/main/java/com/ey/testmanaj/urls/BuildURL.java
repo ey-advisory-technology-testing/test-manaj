@@ -1,6 +1,7 @@
 package com.ey.testmanaj.urls;
 
 import java.io.IOException;
+import java.nio.file.FileSystems;
 
 import com.ey.testmanaj.App;
 import com.ey.beans.SessionBean;
@@ -26,7 +27,7 @@ public class BuildURL {
 	 * @throws IOException the io exception
 	 */
 	public static void setEnv() throws IOException {
-		BuildURL.propReader = new PropertyReader(App.getResourcesFilePath() + "\\resources\\configuration.properties");
+		BuildURL.propReader = new PropertyReader(App.getResourcesFilePath() + FileSystems.getDefault().getSeparator() + App.getConfigFileRoot() + "configuration.properties");
 		BuildURL.baseURL = propReader.readValue("baseURL");
 		BuildURL.domain = propReader.readValue("domain");
 		BuildURL.project = propReader.readValue("project");
