@@ -206,7 +206,7 @@ public class App {
      * @throws IOException                  the io exception
      * @throws ConfigurationException       the configuration exception
      */
-    public void createTestSet() throws IOException, ConfigurationException{
+    public void createTestSet() throws IOException, ConfigurationException, ParserConfigurationException, SAXException {
         XmlMapper xmlMapper = new XmlMapper();
 
         findTestSetFolderID();
@@ -247,7 +247,7 @@ public class App {
      * @param headers the request headers
      * @throws IOException the io exception
      */
-    public void getTestSet(String headers) throws IOException {
+    public void getTestSet(String headers) throws IOException, ConfigurationException, ParserConfigurationException, SAXException {
 
         GenericUrl testSetURL = BuildURL.getGenericURL("createTestSet");
 
@@ -274,6 +274,8 @@ public class App {
             objTestRun.writeValue("cycle-id", getAttributeFromXMLResponse(temp, "id"));
         } catch (Exception e) {
             e.getLocalizedMessage();
+            throw e;
+
         }
 
     }
@@ -530,6 +532,8 @@ public class App {
             req.execute();
         } catch (HttpResponseException e) {
             e.getLocalizedMessage();
+            throw e;
+
         }
 
     }
@@ -636,6 +640,7 @@ public class App {
             }
         } catch (HttpResponseException e) {
             e.getLocalizedMessage();
+            throw e;
         }
     }
 
@@ -711,6 +716,7 @@ public class App {
             req.execute();
         } catch (Exception e) {
             e.getLocalizedMessage();
+
         }
     }
 
@@ -976,6 +982,7 @@ public class App {
         String headers = isAuthenticated();
 
         GenericUrl url = BuildURL.getGenericURL("testSetFolder");
+
 
         String parentID = "-1";
         try {
