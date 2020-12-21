@@ -37,7 +37,7 @@ To install TestManaJ, follow these steps:
 
 * Download the jar file from the GitHub repository.
 * Import the Jar into your project's IDE. You may also reference the JAR file into your `pom.xml`, or any other method of your choosing.
-* Finally, download the ALM resources folder and place on your local. This directory can be placed anywhere on your native project or windows explorer.
+* Finally, download the resources folder and place on your local. This directory can be placed anywhere on your native project or windows explorer.
 
 
 ## Configuring TestmanaJ
@@ -139,27 +139,27 @@ Below you will find an example of a hashmap that will pass the `ExecuteApp` clas
         steps.put("Step 2", stepProperties);
        
 
-        String almResoucesPath = SystemUtils.getUserDir().toString();
+        String resoucesPath = SystemUtils.getUserDir().toString();
 
-        updateALMForTestCase(testCaseName, steps, runProperties, almResoucesPath);
+        updateTestCase(testCaseName, steps, runProperties, resoucesPath);
    }
 
-public static void updateALMForTestCase(String testCaseName, LinkedHashMap<String, 
+public static void updateTestCase(String testCaseName, LinkedHashMap<String, 
 LinkedHashMap<String, String>> steps, LinkedHashMap<String, String> runProperties, 
-String almResourcesPath) throws Exception {
-      App executeApp = new App(almResourcesPath);
-      executeApp.updateTestRun(testCaseName, steps, runProperties);
+String resourcesPath) throws Exception {
+      App executeApp = new App(resourcesPath);
+      executeApp.updateTestResult(testCaseName, steps, runProperties);
    }
 
 ```
 
-Below you will find an example of a dynamically integrated hashmap using bdd that will pass the `ExecuteApp` class to ALM.
+Below you will find an example of a dynamically integrated hashmap using bdd that will pass the `ExecuteApp` class to test management tool.
 
 Initally, this is the setup creating the different objects and variables needed. 
 
 ```java
-public class ALMHooks {
-    Logger logger = Logger.getLogger(ALMHooks.class.getName());
+public class Hooks {
+    Logger logger = Logger.getLogger(Hooks.class.getName());
 
       LinkedHashMap<String, String> runProperties = new LinkedHashMap<>();
       LinkedHashMap<String, LinkedHashMap<String, String>> steps = new LinkedHashMap<>();
@@ -172,18 +172,18 @@ int c=0;
       String errors = "";
 
 
-      public String deploy_alm_connector=GlobalProperties.getConfigProperties().getProperty("deploy_alm_connector").toLowerCase();
+      public String deploy_connector=GlobalProperties.getConfigProperties().getProperty("deploy_connector").toLowerCase();
  ```
- These two functions add proprerties to a step (date, time) and add properties to a run (date, time)
+ These two functions add properties to a step (date, time) and add properties to a run (date, time)
  ```java
 
       public void addStepProperties(String key, String value) {
-                      if (deploy_alm_connector.equals("true")) {
+                      if (deploy_connector.equals("true")) {
                                       stepProperties.put(key, value);
                       }
       }
       public void addRunProperties(String key, String value){
-                      if (deploy_alm_connector.equals("true")) {
+                      if (deploy_connector.equals("true")) {
                                       runProperties.put(key, value);
                       }
       }
@@ -194,8 +194,8 @@ This function happens before every Test. Additonally, the file path needs to cha
 
 @Before
 public void beforeTest(Scenario scenario) throws Throwable {
-  if (GlobalProperties.getConfigProperties().getProperty("deploy_alm_connector").equalsIgnoreCase("true")) { // toggle for deploy data to ALM
-                  File file = new File("C:\\Users\\mb584ed\\Documents\\EY AUTO\\I&A\\Frameworks\\almConnector\\logs\\" + scenario.getName() + ".txt");
+  if (GlobalProperties.getConfigProperties().getProperty("deploy_connector").equalsIgnoreCase("true")) { // toggle for deploy data to reporting tool
+                  File file = new File("C:\\Users\\mb584ed\\Documents\\EY AUTO\\I&A\\Frameworks\\connector\\logs\\" + scenario.getName() + ".txt");
                   passorfail = new ArrayList<String>();
                   int c=0;
                   runProperties = new LinkedHashMap<>();
@@ -261,7 +261,7 @@ It is important to note, the file path needs to change for the specific user in 
 @After
 public void afterTest(Scenario scenario) throws Throwable {
 
-    if (GlobalProperties.getConfigProperties().getProperty("deploy_alm_connector").equalsIgnoreCase("true")) {
+    if (GlobalProperties.getConfigProperties().getProperty("deploy_connector").equalsIgnoreCase("true")) {
                     try {
 
     //To change the status of all passed steps
@@ -280,7 +280,7 @@ public void afterTest(Scenario scenario) throws Throwable {
 
 
     if (scenario.isFailed()) {
-                    File file = new File("C:\\Users\\mb584ed\\Documents\\EY AUTO\\I&A\\Frameworks\\almConnector\\logs\\" + scenario.getName() + ".txt");
+                    File file = new File("C:\\Users\\mb584ed\\Documents\\EY AUTO\\I&A\\Frameworks\\connector\\logs\\" + scenario.getName() + ".txt");
                     StringWriter error = new StringWriter();
                     e.printStackTrace(new PrintWriter(error));
                     String test = error.toString();
@@ -330,8 +330,8 @@ public void afterTest(Scenario scenario) throws Throwable {
                 }
 }
 String testCaseName = scenario.getName();
-//Deploying Test data to ALM
-ExecuteApp.updateALMForTestCase(testCaseName, steps, runProperties, System.getProperty("user.dir"));
+//Deploying Test data to test management tool
+ExecuteApp.updateTestCase(testCaseName, steps, runProperties, System.getProperty("user.dir"));
         }
     }
 }
