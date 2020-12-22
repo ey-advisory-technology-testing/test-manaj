@@ -149,6 +149,7 @@ public class App {
 
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -237,6 +238,7 @@ public class App {
             e.getLocalizedMessage();
 
             getTestSet(headers);
+            throw e;
         }
 
     }
@@ -381,7 +383,7 @@ public class App {
      * @return the http request header/cookie
      * @throws ConfigurationException the Configuration Exception
      */
-    public String authenticate() throws ConfigurationException {
+    public String authenticate() throws ConfigurationException, IOException {
 
         String cookie = "";
         try {
@@ -394,6 +396,7 @@ public class App {
             cookie = header.getCookies(headers);
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
         return cookie;
     }
@@ -450,8 +453,8 @@ public class App {
 
             arrTemp = getTestSteps().split(";");
         } catch (HttpResponseException e) {
-
             e.getLocalizedMessage();
+            throw e;
         }
         return arrTemp;
     }
@@ -494,6 +497,7 @@ public class App {
             objTestRunStep.writeValue("TestRunSteps", testStepIDs);
         } catch (HttpResponseException e) {
             e.getLocalizedMessage();
+            throw e;
         }
 
         return testStepIDs;
@@ -716,6 +720,7 @@ public class App {
             req.execute();
         } catch (Exception e) {
             e.getLocalizedMessage();
+            throw e;
 
         }
     }
@@ -963,6 +968,7 @@ public class App {
             req.execute();
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
 
     }
@@ -973,7 +979,7 @@ public class App {
      * @throws ConfigurationException       the configuration exception
      * @throws IOException                  the io exception
      */
-    public void findTestSetFolderID() throws ConfigurationException, IOException{
+    public void findTestSetFolderID() throws ConfigurationException, IOException, ParserConfigurationException, SAXException {
 
         String testSetPath = objConfig.readValue("testSetFolderPath");
 
@@ -1009,6 +1015,7 @@ public class App {
             objTestSet.writeValue("parent-id", parentID);
         }catch(Exception e) {
             System.out.println("Test Set Path " + testSetPath + " does not exist. Please provide the correct Test Set Path");
+            throw e;
         }
     }
 
@@ -1039,6 +1046,7 @@ public class App {
 
         } catch (HttpResponseException e) {
             e.getLocalizedMessage();
+            throw e;
         }
     }
 
