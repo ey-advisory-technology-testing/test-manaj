@@ -330,7 +330,7 @@ public void afterTest(Scenario scenario) throws Throwable {
                                 }
                 }
 }
-                //System.out.println(steps);
+                System.out.println(steps);
                 //Taking screenshot for Failed Step and adding to runProperties
                 String screenshotpath = ScreenShotMethods.captureScreenShot(OutputType.FILE, scenario);
                 scenario.embed(((TakesScreenshot) DriverUtil.getDefaultDriver()).getScreenshotAs(OutputType.BYTES), "image/png");
