@@ -6,14 +6,13 @@
 
 
 
-TestmanaJ is a automation utility that performs the process of injecting test results into third-party test management tools, such as ALM or JIRA.
+TestmanaJ is a automated connector utility that injects test results into common test management tools.
 
-
-TestmanaJ's detailed and customizable data-driven properties *save the user time* in manually uploading automation results and facilitates a **single** location for manual and automated test execution reporting.
+TestmanaJ's detailed and customizable data-driven properties *save the user time* in manually uploading test results and facilitates a **single** location for manual and automated test execution reporting.
 
 
 ## Features
-* Dynamically construct API Requests for common third-party Test Management Tools.
+* Dynamically construct API Requests for common third-party Test Management Tools
 * Easy to use
 * High level of Customization
 * Works with any Java Framework
@@ -26,8 +25,8 @@ TestmanaJ's detailed and customizable data-driven properties *save the user time
 
 Ensure you have met the following minimum requirements:
 
-* You have installed atleast <a href="https://maven.apache.org/download.cgi" > Maven 3.5 </a> or higher
-* You have installed atleast <a href="https://www.oracle.com/java/technologies/javase-downloads.html" > Java 8 </a> or higher
+* You have installed at least <a href="https://maven.apache.org/download.cgi" > Maven 3.5 </a> or higher
+* You have installed at least <a href="https://www.oracle.com/java/technologies/javase-downloads.html" > Java 8 </a> or higher
 * You use an IDE
 
 
@@ -37,7 +36,7 @@ To install TestManaJ, follow these steps:
 
 * Download the jar file from the GitHub repository.
 * Import the Jar into your project's IDE. You may also reference the JAR file into your `pom.xml`, or any other method of your choosing.
-* Finally, download the resources folder and place on your local. This directory can be placed anywhere on your native project or windows explorer.
+* Finally, download the resources folder and place on your local. This directory can be placed anywhere on your native project or windows explorer. 
 
 
 ## Configuring TestmanaJ
@@ -111,8 +110,18 @@ Below is a list of test run, and run step properties available for setting:
 
 </table>
 
-## Usage
-Below you will find an example of a hashmap that will pass the `ExecuteApp` class to the test managment tool of your choosing, it is important to note that though this is a hardcoded example, you will generate the hashmaps dynamically from your framework. 
+At bare minimum we recommend to: 
+* 
+*
+*
+
+
+## Executing in TestmanaJ
+* This is as simple as calling the ExecuteApp method. Initially, we recommend to validate results in your third-party test management tool.
+
+
+## Usage Example
+Below you will find an example of a hashmap that will pass the `ExecuteApp` class to the test management tool of your choosing, it is important to note that though this is a hardcoded example, you will generate the hashmaps dynamically from your framework. 
 
 ```java
 
@@ -195,7 +204,7 @@ This function happens before every Test. Additonally, the file path needs to cha
 @Before
 public void beforeTest(Scenario scenario) throws Throwable {
   if (GlobalProperties.getConfigProperties().getProperty("deploy_connector").equalsIgnoreCase("true")) { // toggle for deploy data to reporting tool
-                  File file = new File("C:\\Users\\mb584ed\\Documents\\EY AUTO\\I&A\\Frameworks\\connector\\logs\\" + scenario.getName() + ".txt");
+                  File file = new File("C:\\ Your file path);
                   passorfail = new ArrayList<String>();
                   int c=0;
                   runProperties = new LinkedHashMap<>();
@@ -280,7 +289,7 @@ public void afterTest(Scenario scenario) throws Throwable {
 
 
     if (scenario.isFailed()) {
-                    File file = new File("C:\\Users\\mb584ed\\Documents\\EY AUTO\\I&A\\Frameworks\\connector\\logs\\" + scenario.getName() + ".txt");
+                    File file = new File("C:\\ Your file path);
                     StringWriter error = new StringWriter();
                     e.printStackTrace(new PrintWriter(error));
                     String test = error.toString();
@@ -339,13 +348,9 @@ ExecuteApp.updateTestCase(testCaseName, steps, runProperties, System.getProperty
 ```
 
 
-## Executing in TestmanaJ
-* The only thing left to do is call the method then validate results in your third-party test managment tool.
-
-
 ## Contributing to TestmanaJ
 
-To contribute to TestManaJ, follow these steps:
+To contribute to TestmanaJ, follow these steps:
 
 1. Fork this repository.
 2. Create a branch: `git checkout -b <branch_name>`.
@@ -360,7 +365,8 @@ Alternatively see the GitHub documentation on [creating a pull request](https://
 Thanks to the following people who have contributed to this project:
 
 * [@sethmwatson](https://github.com/sethmwatson) 📖
-* Teddy Gajewski 🐛📖
+* Manjunath Purad 🐛
+* Teddy Gajewski 🐛
 * Justin Hanke 🐛
 
 You might want to consider using something like the [All Contributors](https://github.com/all-contributors/all-contributors) specification and its [emoji key](https://allcontributors.org/docs/en/emoji-key).
@@ -371,6 +377,15 @@ You might want to consider using something like the [All Contributors](https://g
 If you have absolutely any questions or concerns do not hesitate to contact our support team.  
 
  EY_NGeTAF_Support.GID@ey.net --->
+ 
+ 
+## Agenda
+
+* Evaluate Architecture to support additional test-management tools
+* Increase Branch Coverage for Unit Testing
+* Expand documentation via Github Wiki
+
+
 
 ## License
 
