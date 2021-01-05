@@ -42,12 +42,17 @@ public class AppTest {
 
     @Before
     public void startMockServer() throws IOException {
-        this.mockServer = startClientAndServer( 8888);
-        List<String> enc = new ArrayList<>(); enc.add("gzip");
-        List<String> auth = new ArrayList<>(); auth.add("Basic dGVzdC51c2VybmFtZTo=");
-        List<String> cookie = new ArrayList<>(); cookie.add("JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW");
-        List<String> contentLength = new ArrayList<>(); contentLength.add("0");
-        List<String> connection = new ArrayList<>(); connection.add("keep-alive");
+        this.mockServer = startClientAndServer(8888);
+        List<String> enc = new ArrayList<>();
+        enc.add("gzip");
+        List<String> auth = new ArrayList<>();
+        auth.add("Basic dGVzdC51c2VybmFtZTo=");
+        List<String> cookie = new ArrayList<>();
+        cookie.add("JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW");
+        List<String> contentLength = new ArrayList<>();
+        contentLength.add("0");
+        List<String> connection = new ArrayList<>();
+        connection.add("keep-alive");
 
         this.runStepResponseXML = ("<Entities TotalResults=\"2\">\n" +
                 "    <Entity Type=\"run-step\"> \n" +
@@ -102,7 +107,7 @@ public class AppTest {
                 "    </Entity>\n" +
                 "</Entities>\n");
 
-        this.testSetResponseXML =("<Entities TotalResults=\"2\">\n" +
+        this.testSetResponseXML = ("<Entities TotalResults=\"2\">\n" +
                 "    <Entity Type=\"test-set\">\n" +
                 "        <ChildrenCount>\n" +
                 "            <Value>0</Value>\n" +
@@ -223,7 +228,7 @@ public class AppTest {
                         request()
                                 .withMethod("GET")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/tests/2523")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/tests/2523")
 
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
@@ -457,8 +462,7 @@ public class AppTest {
                 );
 
 
-
- //getTestSet mock
+        //getTestSet mock
         this.mockServer
                 .when(
                         request()
@@ -491,7 +495,7 @@ public class AppTest {
                         request()
                                 .withMethod("POST")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/test-sets")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/test-sets")
                                 .withBody("<Entity Type=\"test-set\"><Fields><Field Name=\"subtype-id\"><Value>hp.qc.test-set.default</Value></Field><Field Name=\"name\"><Value>2BrandNewTestSet3</Value></Field><Field Name=\"parent-id\"><Value>21</Value></Field><Field Name=\"status\"><Value></Value></Field></Fields></Entity>")
                                 .withHeaders(
                                         new Header("content-type", "application/xml"),
@@ -512,7 +516,7 @@ public class AppTest {
                         request()
                                 .withMethod("PUT")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532")
                                 .withBody("<Entity Type=\"run\"><Fields><Field Name=\"attachment\"><Value>Y</Value></Field><Field Name=\"comments\"><Value>This is a comment</Value></Field><Field Name=\"status\"><Value>Failed</Value></Field></Fields></Entity>")
                                 .withHeaders(
                                         new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
@@ -532,15 +536,13 @@ public class AppTest {
                 );
 
 
-
-
         //createTestStepAndStatus mock1
         this.mockServer
                 .when(
                         request()
                                 .withMethod("POST")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
                                 .withBody("<Entity Type=\"run-step\"><Fields><Field Name=\"name\"><Value>Step 1</Value></Field><Field Name=\"status\"><Value>Passed</Value></Field><Field Name=\"description\"><Value>Given I navigate to www.google.com</Value></Field><Field Name=\"execution-time\"><Value>14:38:14</Value></Field></Fields></Entity>")
                                 .withHeaders(
                                         new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
@@ -564,7 +566,7 @@ public class AppTest {
                         request()
                                 .withMethod("POST")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
                                 .withBody("<Entity Type=\"run-step\"><Fields><Field Name=\"name\"><Value>Step 2</Value></Field><Field Name=\"status\"><Value>Passed</Value></Field><Field Name=\"description\"><Value>Given I enter text search into search.bar</Value></Field><Field Name=\"expected\"><Value>Google Home Page Should Load</Value></Field></Fields></Entity>")
                                 .withHeaders(
                                         new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
@@ -588,7 +590,7 @@ public class AppTest {
                         request()
                                 .withMethod("POST")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
                                 .withBody("<Entity Type=\"run-step\"><Fields><Field Name=\"name\"><Value>Step 3</Value></Field><Field Name=\"status\"><Value>Failed</Value></Field><Field Name=\"description\"><Value>Then google.results are displayed</Value></Field><Field Name=\"actual\"><Value>Exception in thread \"main\" java.util.NoSuchElementException\n" +
                                         "at java.util.Scanner.throwFor(Scanner.java:838)\n" +
                                         "at java.util.Scanner.next(Scanner.java:1461)\n" +
@@ -618,7 +620,7 @@ public class AppTest {
                         request()
                                 .withMethod("POST")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
                                 .withBody("<Entity Type=\"run-step\"><Fields><Field Name=\"name\"><Value>Step 4</Value></Field><Field Name=\"status\"><Value>No Run</Value></Field><Field Name=\"description\"><Value>Then google.logo is displayed</Value></Field><Field Name=\"execution-date\"><Value>2009-01-27</Value></Field></Fields></Entity>")
                                 .withHeaders(
                                         new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
@@ -642,7 +644,7 @@ public class AppTest {
                         request()
                                 .withMethod("POST")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
                                 .withBody("<Entity Type=\"run-step\"><Fields><Field Name=\"name\"><Value>Step 5</Value></Field><Field Name=\"status\"><Value>No Run</Value></Field><Field Name=\"description\"><Value>Then I click google.home</Value></Field></Fields></Entity>")
                                 .withHeaders(
                                         new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
@@ -659,9 +661,6 @@ public class AppTest {
                 );
 
 
-
-
-
         //getTestSteps mock
 
         this.mockServer
@@ -669,7 +668,7 @@ public class AppTest {
                         request()
                                 .withMethod("GET")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps/")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps/")
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
                                         new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
@@ -686,12 +685,7 @@ public class AppTest {
                                 .withBody(runStepResponseXML)
 
 
-
                 );
-
-
-
-
 
 
         //CreateTestRun mock
@@ -700,7 +694,7 @@ public class AppTest {
                         request()
                                 .withMethod("POST")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs")
                                 .withBody("<Entity Type=\"run\"><Fields><Field Name=\"test-id\"><Value>2523</Value></Field><Field Name=\"owner\"><Value>manjunath.purad</Value></Field><Field Name=\"subtype-id\"><Value>hp.qc.run.MANUAL</Value></Field><Field Name=\"cycle-id\"><Value>501</Value></Field><Field Name=\"test-instance\"><Value>1</Value></Field><Field Name=\"name\"><Value>Demo Test1</Value></Field><Field Name=\"testcycl-id\"><Value>1956</Value></Field><Field Name=\"status\"><Value>Not Completed</Value></Field></Fields></Entity>")
 
                                 .withHeaders(
@@ -867,7 +861,7 @@ public class AppTest {
                         request()
                                 .withMethod("DELETE")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps/1001")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps/1001")
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
                                         new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
@@ -890,7 +884,7 @@ public class AppTest {
                         request()
                                 .withMethod("DELETE")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps/1002")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps/1002")
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
                                         new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
@@ -908,7 +902,7 @@ public class AppTest {
 
                 );
 
-      //  findTestSetFolderIDTestMock1
+        //  findTestSetFolderIDTestMock1
         this.mockServer
                 .when(
                         request()
@@ -1040,7 +1034,7 @@ public class AppTest {
                         request()
                                 .withMethod("GET")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/attachments")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/attachments")
                                 .withHeaders(
                                         new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
 
@@ -1065,7 +1059,7 @@ public class AppTest {
                         request()
                                 .withMethod("POST")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/attachments")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/attachments")
 
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
@@ -1082,20 +1076,47 @@ public class AppTest {
 
 
                 );
-      //  attachWithOctetStream mock
+
+        //uploadAttachmentToStep mock
 
         this.mockServer
                 .when(
                         request()
                                 .withMethod("POST")
                                 .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/attachments")
+                                .withQueryStringParameter("login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/run-steps/1001/attachments")
+                                //.withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/run-steps/1001/attachments")
+
+                                .withHeaders(
+                                        new Header("accept-encoding", enc),
+                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        //new Header(CONTENT_TYPE.toString(), "multipart/form-data; boundary=1608129522111")
+                                )
+                )
+                .respond(
+                        response()
+                                .withStatusCode(200)
+                                .withHeaders(
+                                        new Header("connection", connection)
+                                )
+
+
+                );
+
+        //  attachWithOctetStream mock
+
+        this.mockServer
+                .when(
+                        request()
+                                .withMethod("POST")
+                                .withPath("/qcbin/")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/attachments")
 
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
                                         new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW"),
-                                        new Header("content-type","application/octet-stream"),
-                                        new Header("slug","jpg-vs-jpeg-file-formats_1.jpg")
+                                        new Header("content-type", "application/octet-stream"),
+                                        new Header("slug", "jpg-vs-jpeg-file-formats_1.jpg")
                                 )
                 )
                 .respond(
@@ -1121,8 +1142,6 @@ public class AppTest {
     }
 
 
-
-
     @After
     public void stopMockServer() {
         mockServer.stop();
@@ -1132,10 +1151,10 @@ public class AppTest {
     public void testConstructor() {
         new App("Path",
                 FileSystems.getDefault().getSeparator() +
-                "src" + FileSystems.getDefault().getSeparator() +
-                "test" + FileSystems.getDefault().getSeparator() +
-                "resources" + FileSystems.getDefault().getSeparator() +
-                "testResources" + FileSystems.getDefault().getSeparator());
+                        "src" + FileSystems.getDefault().getSeparator() +
+                        "test" + FileSystems.getDefault().getSeparator() +
+                        "resources" + FileSystems.getDefault().getSeparator() +
+                        "testResources" + FileSystems.getDefault().getSeparator());
         assertEquals("Path", App.resourcesFilePath);
     }
 
@@ -1158,9 +1177,8 @@ public class AppTest {
     @Test
     public void getSession() throws IOException {
         GenericUrl url = new GenericUrl("http://localhost:8888/qcbin/rest/site-session");
-        assertNotNull( app.getSession(url, "<session-parameters><client-type>REST Client</client-type></session-parameters>","JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW"));
+        assertNotNull(app.getSession(url, "<session-parameters><client-type>REST Client</client-type></session-parameters>", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW"));
     }
-
 
 
     @Test(expected = Test.None.class)
@@ -1172,7 +1190,6 @@ public class AppTest {
         runProperties.put("status", "Failed");
         app.updateTestRun(runProperties);
     }
-
 
 
     @Test(expected = Test.None.class)
@@ -1193,7 +1210,7 @@ public class AppTest {
 
     @Test(expected = Test.None.class)
     public void createTestInstanceWithTestIDAndNoExistingTestInstance() throws ParserConfigurationException, SAXException, IOException, ConfigurationException {
-       app.createTestInstance("2523");
+        app.createTestInstance("2523");
     }
 
 
@@ -1202,7 +1219,7 @@ public class AppTest {
         LinkedHashMap<String, String> stepProperties = new LinkedHashMap<>();
         stepProperties.put("status", "Passed");
         stepProperties.put("description", "Given I navigate to www.google.com");
-        stepProperties.put("execution-time","14:38:14");
+        stepProperties.put("execution-time", "14:38:14");
         app.createTestStepAndStatus(stepProperties, "Step 1");
     }
 
@@ -1225,45 +1242,19 @@ public class AppTest {
 
     @Test
     public void getRunStepID() throws IOException, ParserConfigurationException, SAXException {
-        assertEquals("1001;1002",app.getRunStepID(runStepResponseXML));
+        assertEquals("1001;1002", app.getRunStepID(runStepResponseXML));
     }
 
 
     @Test(expected = Test.None.class) //404 error
-    public void uploadAttachmentToStep() throws IOException, ConfigurationException{
-        List<String> enc = new ArrayList<>(); enc.add("gzip");
-        List<String> contentLength = new ArrayList<>(); contentLength.add("0");
-        List<String> connection = new ArrayList<>(); connection.add("keep-alive");
-        this.mockServer
-                .when(
-                        request()
-                                .withMethod("POST")
-                                .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/run-steps/1001/attachments")
-                                //.withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/run-steps/1001/attachments")
-
-                                .withHeaders(
-                                        new Header("accept-encoding", enc),
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
-                                        //new Header(CONTENT_TYPE.toString(), "multipart/form-data; boundary=1608129522111")
-                                )
-                )
-                .respond(
-                        response()
-                                .withStatusCode(200)
-                                .withHeaders(
-                                        new Header("connection", connection)
-                                )
-
-
-                );
+    public void uploadAttachmentToStep() throws IOException, ConfigurationException {
         String filepath = System.getProperty("user.dir") + Paths.get("/src/test/resources/");
         app.uploadAttachmentToStep(filepath, "jpg-vs-jpeg-file-formats_1.jpg", "1001");
-
     }
 
+
     @Test(expected = Test.None.class) //404 error
-    public void uploadAttachment() throws IOException, ConfigurationException{
+    public void uploadAttachment() throws IOException, ConfigurationException {
         String filepath = System.getProperty("user.dir") + Paths.get("/src/test/resources/");
         app.uploadAttachment(filepath, "jpg-vs-jpeg-file-formats_1.jpg");
 
@@ -1283,11 +1274,11 @@ public class AppTest {
 
     @Test
     public void createTestRun() throws ConfigurationException, ParserConfigurationException, SAXException, IOException {
-        assertArrayEquals(new String[]{ "1001","1002" }, app.createTestRun());
+        assertArrayEquals(new String[]{"1001", "1002"}, app.createTestRun());
     }
 
 
-    @Test (expected = Test.None.class)
+    @Test(expected = Test.None.class)
     public void getTestSet() throws IOException, ConfigurationException, ParserConfigurationException, SAXException {
         app.getTestSet(";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW");
     }
@@ -1304,7 +1295,7 @@ public class AppTest {
 
     @Test(expected = Test.None.class)
     public void deleteAllTestSteps() throws ParserConfigurationException, SAXException, IOException, ConfigurationException {
-        app.deleteAllTestSteps(new String[]{ "1001","1002" });
+        app.deleteAllTestSteps(new String[]{"1001", "1002"});
     }
 
     @Test(expected = Test.None.class)
@@ -1321,7 +1312,7 @@ public class AppTest {
 
     @Test(expected = Test.None.class)
     public void createTestSetTest() throws ParserConfigurationException, SAXException, ConfigurationException, IOException {
-       app.createTestSet();
+        app.createTestSet();
     }
 
 
@@ -1333,7 +1324,7 @@ public class AppTest {
         LinkedHashMap<String, String> stepProperties = new LinkedHashMap<>();
         stepProperties.put("status", "Passed");
         stepProperties.put("description", "Given I navigate to www.google.com");
-        stepProperties.put("execution-time","14:38:14");
+        stepProperties.put("execution-time", "14:38:14");
         steps.put("Step 1", stepProperties);
 
         stepProperties = new LinkedHashMap<>();
@@ -1357,7 +1348,7 @@ public class AppTest {
         stepProperties = new LinkedHashMap<>();
         stepProperties.put("status", "No Run");
         stepProperties.put("description", "Then google.logo is displayed");
-        stepProperties.put("execution-date","2009-01-27");
+        stepProperties.put("execution-date", "2009-01-27");
         steps.put("Step 4", stepProperties);
 
         stepProperties = new LinkedHashMap<>();
@@ -1371,13 +1362,13 @@ public class AppTest {
         app.updateTestResult(testCaseName, steps, runProperties);
     }
 
-    @Test
+    @Test(expected = Test.None.class)
     public void executeApp() throws Exception {
 
         String testCaseName = "Demo Test1";
 
         LinkedHashMap<String, String> runProperties = new LinkedHashMap<>();
-       // runProperties.put("attachment", "src/test/resources/jpg-vs-jpeg-file-formats_1.jpg;src/test/resources/jpg-vs-jpeg-file-formats_2.jpg");
+        // runProperties.put("attachment", "src/test/resources/jpg-vs-jpeg-file-formats_1.jpg;src/test/resources/jpg-vs-jpeg-file-formats_2.jpg");
         runProperties.put("attachment", System.getProperty("user.dir") + Paths.get("/src/test/resources/jpg-vs-jpeg-file-formats_1.jpg"));
         runProperties.put("comments", "This is a comment");
 
@@ -1386,7 +1377,7 @@ public class AppTest {
         LinkedHashMap<String, String> stepProperties = new LinkedHashMap<>();
         stepProperties.put("status", "Passed");
         stepProperties.put("description", "Given I navigate to www.google.com");
-        stepProperties.put("execution-time","14:38:14");
+        stepProperties.put("execution-time", "14:38:14");
         steps.put("Step 1", stepProperties);
 
         stepProperties = new LinkedHashMap<>();
@@ -1404,14 +1395,14 @@ public class AppTest {
                 "at java.util.Scanner.nextInt(Scanner.java:2091)\n" +
                 "at java.util.Scanner.nextInt(Scanner.java:2050)\n" +
                 "at Addition.main(Addition.java:16)");
-       // stepProperties.put("attachment", "src/test/resources/jpg-vs-jpeg-file-formats_1.jpg");
+        // stepProperties.put("attachment", "src/test/resources/jpg-vs-jpeg-file-formats_1.jpg");
         stepProperties.put("attachment", System.getProperty("user.dir") + Paths.get("/src/test/resources/jpg-vs-jpeg-file-formats_1.jpg"));
         steps.put("Step 3", stepProperties);
 
         stepProperties = new LinkedHashMap<>();
         stepProperties.put("status", "No Run");
         stepProperties.put("description", "Then google.logo is displayed");
-        stepProperties.put("execution-date","2009-01-27");
+        stepProperties.put("execution-date", "2009-01-27");
         steps.put("Step 4", stepProperties);
 
         stepProperties = new LinkedHashMap<>();
@@ -1429,12 +1420,13 @@ public class AppTest {
         app.updateTestCase(testCaseName, steps, runProperties, resourcesPath, configFilesRoot);
     }
 
-    //Exceptions
+
+    //Exceptions Test
 
     @Test(expected = HttpResponseException.class)
     public void authenticateExceptionTest() throws IOException, ConfigurationException {
         mockServer.stop();
-        this.mockServer = startClientAndServer( 8888);
+        this.mockServer = startClientAndServer(8888);
         app.authenticate();
     }
 
@@ -1448,14 +1440,13 @@ public class AppTest {
         LinkedHashMap<String, String> stepProperties = new LinkedHashMap<>();
         stepProperties.put("status", "Passed");
         stepProperties.put("description", "Given I navigate to www.google.com");
-        stepProperties.put("execution-time","14:38:14");
+        stepProperties.put("execution-time", "14:38:14");
         steps.put("Step 1", stepProperties);
 
         LinkedHashMap<String, String> runProperties = new LinkedHashMap<>();
         runProperties.put("attachment", System.getProperty("user.dir") + Paths.get("/src/test/resources/jpg-vs-jpeg-file-formats_12.jpg"));
         app.updateTestResult(testCaseName, steps, runProperties);
     }
-
 
 
     @Test(expected = HttpResponseException.class)
@@ -1469,7 +1460,7 @@ public class AppTest {
         LinkedHashMap<String, String> stepProperties = new LinkedHashMap<>();
         stepProperties.put("status", "Passed");
         stepProperties.put("description", "Given I navigate to www.google.com");
-        stepProperties.put("execution-time","14:38:14");
+        stepProperties.put("execution-time", "14:38:14");
         app.createTestStepAndStatus(stepProperties, "Step1");
     }
 
@@ -1486,22 +1477,22 @@ public class AppTest {
 
     @Test(expected = HttpResponseException.class)
     public void deleteAllTestStepsExceptionTest() throws Exception {
-        app.deleteAllTestSteps(new String[]{ "1001","2222" });
+        app.deleteAllTestSteps(new String[]{"1001", "2222"});
 
     }
 
-    @Test//not working
-    public void getAttributeFromXMLExceptionTest() throws ParserConfigurationException, SAXException, IOException {
-         app.getAttributeFromXMLResponse(runStepResponseXML, "invalid_id");
-    }
+
 
     @Test(expected = HttpResponseException.class)
     public void attachWithOctetStreamExceptionTest() throws Exception {
         mockServer.stop();
-        this.mockServer = startClientAndServer( 8888);
-        List<String> enc = new ArrayList<>(); enc.add("gzip");
-        List<String> auth = new ArrayList<>(); auth.add("Basic dGVzdC51c2VybmFtZTo=");
-        List<String> cookie = new ArrayList<>(); cookie.add("JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW");
+        this.mockServer = startClientAndServer(8888);
+        List<String> enc = new ArrayList<>();
+        enc.add("gzip");
+        List<String> auth = new ArrayList<>();
+        auth.add("Basic dGVzdC51c2VybmFtZTo=");
+        List<String> cookie = new ArrayList<>();
+        cookie.add("JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW");
         this.mockServer
                 .when(
                         request()
@@ -1538,21 +1529,23 @@ public class AppTest {
                 );
 
 
+        String filepath = System.getProperty("user.dir") + Paths.get("/src/test/resources/");
+        app.attachWithOctetStream(filepath, "jpg-vs-jpeg-file-formats_1.jpg");
 
-            String filepath = System.getProperty("user.dir") + Paths.get("/src/test/resources/");
-            app.attachWithOctetStream(filepath, "jpg-vs-jpeg-file-formats_1.jpg");
 
-
-        }
+    }
 
 
     @Test(expected = HttpResponseException.class)
     public void findTestSetFolderIDExceptionTest() throws Exception {
         mockServer.stop();
-        this.mockServer = startClientAndServer( 8888);
-        List<String> enc = new ArrayList<>(); enc.add("gzip");
-        List<String> auth = new ArrayList<>(); auth.add("Basic dGVzdC51c2VybmFtZTo=");
-        List<String> cookie = new ArrayList<>(); cookie.add("JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW");
+        this.mockServer = startClientAndServer(8888);
+        List<String> enc = new ArrayList<>();
+        enc.add("gzip");
+        List<String> auth = new ArrayList<>();
+        auth.add("Basic dGVzdC51c2VybmFtZTo=");
+        List<String> cookie = new ArrayList<>();
+        cookie.add("JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW");
         this.mockServer
                 .when(
                         request()
@@ -1588,8 +1581,8 @@ public class AppTest {
 
                 );
         app.findTestSetFolderID();
-    }
 
+    }
 
 
     @Test(expected = HttpResponseException.class)
@@ -1690,10 +1683,14 @@ public class AppTest {
     public void createTestSetExceptionTest() throws Exception {
         mockServer.stop();
         this.mockServer = startClientAndServer(8888);
-        List<String> enc = new ArrayList<>(); enc.add("gzip");
-        List<String> auth = new ArrayList<>();auth.add("Basic dGVzdC51c2VybmFtZTo=");
-        List<String> cookie = new ArrayList<>();cookie.add("JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW");
-        List<String> connection = new ArrayList<>(); connection.add("keep-alive");
+        List<String> enc = new ArrayList<>();
+        enc.add("gzip");
+        List<String> auth = new ArrayList<>();
+        auth.add("Basic dGVzdC51c2VybmFtZTo=");
+        List<String> cookie = new ArrayList<>();
+        cookie.add("JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW");
+        List<String> connection = new ArrayList<>();
+        connection.add("keep-alive");
 
         this.mockServer
                 .when(
@@ -1815,10 +1812,104 @@ public class AppTest {
                 );
 
 
-
         app.createTestSet();
     }
 
+    @Test(expected = HttpResponseException.class)
+    public void createTestInstanceExceptionTest() throws Exception {
+        mockServer.stop();
+        this.mockServer = startClientAndServer(8888);
+        List<String> enc = new ArrayList<>(); enc.add("gzip");
+        List<String> auth = new ArrayList<>(); auth.add("Basic dGVzdC51c2VybmFtZTo=");
+        List<String> cookie = new ArrayList<>(); cookie.add("JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW");
+        List<String> connection = new ArrayList<>(); connection.add("keep-alive");
+        List<String> contentLength = new ArrayList<>(); contentLength.add("0");
+
+        this.mockServer
+                .when(
+                        request()
+                                .withMethod("POST")
+                                .withPath("/qcbin/authentication-point/authenticate")
+                                .withBody("")
+                                .withHeaders(
+                                        new Header("accept-encoding", enc),
+                                        new Header("authorization", auth)
+                                )
+                )
+                .respond(
+                        response()
+                                .withStatusCode(200)
+                                .withCookie("JSESSIONID", "2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                );
+
+        this.mockServer
+                .when(
+                        request()
+                                .withMethod("POST")
+                                .withPath("/qcbin/rest/site-session")
+                                .withBody("")
+                                .withHeaders(
+                                        new Header("accept-encoding", enc),
+                                        new Header("cookie", cookie)
+                                )
+                )
+                .respond(
+                        response()
+                                .withStatusCode(200)
+                                .withCookie("JSESSIONID", "2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+
+                );
+
+        //getTestsById mock
+        this.mockServer
+                .when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/qcbin/")
+                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/tests/2523")
+
+                                .withHeaders(
+                                        new Header("accept-encoding", enc),
+                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                )
+                )
+                .respond(
+                        response()
+                                .withStatusCode(200)
+                                .withHeaders(
+                                        new Header("content-length", contentLength),
+                                        new Header("connection", connection)
+                                )
+
+
+                );
+
+        //createTestInstance Get mock
+        this.mockServer
+                .when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/qcbin/")
+                                .withQueryStringParameters(
+
+                                        new Parameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/test-instances/?query={cycle-id[501]"),
+                                        new Parameter("test-id[2523]}", "")
+                                )
+                                .withHeaders(
+                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                )
+                )
+                .respond(
+                        response()
+                                .withStatusCode(200)
+                                .withHeaders(new Header("connection", connection))
+                                .withBody("<Entities TotalResults=\"0\">\n" +
+                                        "</Entities>")
+                );
+
+        app.createTestInstance("2523");
+
+
+    }
 
 }
-
