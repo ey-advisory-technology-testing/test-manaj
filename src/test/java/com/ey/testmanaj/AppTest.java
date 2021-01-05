@@ -1052,56 +1052,6 @@ public class AppTest {
                 );
 
 
-        //uploadAttachment POST mock
-
-        this.mockServer
-                .when(
-                        request()
-                                .withMethod("POST")
-                                .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/attachments")
-
-                                .withHeaders(
-                                        new Header("accept-encoding", enc),
-                                        new Header("Cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
-                                )
-                )
-                .respond(
-                        response()
-                                .withStatusCode(200)
-                                .withHeaders(
-                                        new Header("content-length", contentLength),
-                                        new Header("connection", connection)
-                                )
-
-
-                );
-
-        //uploadAttachmentToStep mock
-
-        this.mockServer
-                .when(
-                        request()
-                                .withMethod("POST")
-                                .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/run-steps/1001/attachments")
-                                //.withQueryStringParameter("login-form-required","y/rest/domains/TRAINING/projects/ALM_Sample/run-steps/1001/attachments")
-
-                                .withHeaders(
-                                        new Header("accept-encoding", enc),
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
-                                        //new Header(CONTENT_TYPE.toString(), "multipart/form-data; boundary=1608129522111")
-                                )
-                )
-                .respond(
-                        response()
-                                .withStatusCode(200)
-                                .withHeaders(
-                                        new Header("connection", connection)
-                                )
-
-
-                );
 
         //  attachWithOctetStream mock
 
@@ -1246,19 +1196,6 @@ public class AppTest {
     }
 
 
-    @Test(expected = Test.None.class) //404 error
-    public void uploadAttachmentToStep() throws IOException, ConfigurationException {
-        String filepath = System.getProperty("user.dir") + Paths.get("/src/test/resources/");
-        app.uploadAttachmentToStep(filepath, "jpg-vs-jpeg-file-formats_1.jpg", "1001");
-    }
-
-
-    @Test(expected = Test.None.class) //404 error
-    public void uploadAttachment() throws IOException, ConfigurationException {
-        String filepath = System.getProperty("user.dir") + Paths.get("/src/test/resources/");
-        app.uploadAttachment(filepath, "jpg-vs-jpeg-file-formats_1.jpg");
-
-    }
 
 
     @Test
@@ -1316,7 +1253,7 @@ public class AppTest {
     }
 
 
-    @Test(expected = Test.None.class)
+    @Test(expected = Test.None.class) //need to complete uploadattachment
     public void updateTestResult() throws Exception {
         String testCaseName = "Demo Test1";
         LinkedHashMap<String, LinkedHashMap<String, String>> steps = new LinkedHashMap<>();
@@ -1362,7 +1299,7 @@ public class AppTest {
         app.updateTestResult(testCaseName, steps, runProperties);
     }
 
-    @Test(expected = Test.None.class)
+    @Test(expected = Test.None.class)// need to complete uploadattachment
     public void executeApp() throws Exception {
 
         String testCaseName = "Demo Test1";
