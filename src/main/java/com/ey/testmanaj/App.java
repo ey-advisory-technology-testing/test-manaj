@@ -149,6 +149,7 @@ public class App {
 
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -206,7 +207,7 @@ public class App {
      * @throws IOException                  the io exception
      * @throws ConfigurationException       the configuration exception
      */
-    public void createTestSet() throws IOException, ConfigurationException{
+    public void createTestSet() throws IOException, ConfigurationException, ParserConfigurationException, SAXException {
         XmlMapper xmlMapper = new XmlMapper();
 
         findTestSetFolderID();
@@ -237,6 +238,7 @@ public class App {
             e.getLocalizedMessage();
 
             getTestSet(headers);
+            throw e;
         }
 
     }
@@ -247,7 +249,7 @@ public class App {
      * @param headers the request headers
      * @throws IOException the io exception
      */
-    public void getTestSet(String headers) throws IOException {
+    public void getTestSet(String headers) throws IOException, ConfigurationException, ParserConfigurationException, SAXException {
 
         GenericUrl testSetURL = BuildURL.getGenericURL("createTestSet");
 
@@ -274,6 +276,8 @@ public class App {
             objTestRun.writeValue("cycle-id", getAttributeFromXMLResponse(temp, "id"));
         } catch (Exception e) {
             e.getLocalizedMessage();
+            throw e;
+
         }
 
     }
@@ -379,7 +383,7 @@ public class App {
      * @return the http request header/cookie
      * @throws ConfigurationException the Configuration Exception
      */
-    public String authenticate() throws ConfigurationException {
+    public String authenticate() throws ConfigurationException, IOException {
 
         String cookie = "";
         try {
@@ -392,6 +396,7 @@ public class App {
             cookie = header.getCookies(headers);
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
         return cookie;
     }
@@ -448,8 +453,8 @@ public class App {
 
             arrTemp = getTestSteps().split(";");
         } catch (HttpResponseException e) {
-
             e.getLocalizedMessage();
+            throw e;
         }
         return arrTemp;
     }
@@ -492,6 +497,7 @@ public class App {
             objTestRunStep.writeValue("TestRunSteps", testStepIDs);
         } catch (HttpResponseException e) {
             e.getLocalizedMessage();
+            throw e;
         }
 
         return testStepIDs;
@@ -530,6 +536,8 @@ public class App {
             req.execute();
         } catch (HttpResponseException e) {
             e.getLocalizedMessage();
+            throw e;
+
         }
 
     }
@@ -636,6 +644,7 @@ public class App {
             }
         } catch (HttpResponseException e) {
             e.getLocalizedMessage();
+            throw e;
         }
     }
 
@@ -711,6 +720,8 @@ public class App {
             req.execute();
         } catch (Exception e) {
             e.getLocalizedMessage();
+            throw e;
+
         }
     }
 
@@ -957,6 +968,7 @@ public class App {
             req.execute();
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
 
     }
@@ -967,7 +979,7 @@ public class App {
      * @throws ConfigurationException       the configuration exception
      * @throws IOException                  the io exception
      */
-    public void findTestSetFolderID() throws ConfigurationException, IOException{
+    public void findTestSetFolderID() throws ConfigurationException, IOException, ParserConfigurationException, SAXException {
 
         String testSetPath = objConfig.readValue("testSetFolderPath");
 
@@ -976,6 +988,7 @@ public class App {
         String headers = isAuthenticated();
 
         GenericUrl url = BuildURL.getGenericURL("testSetFolder");
+
 
         String parentID = "-1";
         try {
@@ -1002,6 +1015,7 @@ public class App {
             objTestSet.writeValue("parent-id", parentID);
         }catch(Exception e) {
             System.out.println("Test Set Path " + testSetPath + " does not exist. Please provide the correct Test Set Path");
+            throw e;
         }
     }
 
@@ -1032,6 +1046,7 @@ public class App {
 
         } catch (HttpResponseException e) {
             e.getLocalizedMessage();
+            throw e;
         }
     }
 

@@ -6,14 +6,13 @@
 
 
 
-TestmanaJ is a automation utility that performs the process of injecting test results into third-party test management tools, such as ALM or JIRA.
+TestmanaJ is a automated connector utility that injects test results into common test management tools.
 
-
-TestmanaJ's detailed and customizable data-driven properties *save the user time* in manually uploading automation results and facilitates a **single** location for manual and automated test execution reporting.
+TestmanaJ's detailed and customizable data-driven properties *save the user time* in manually uploading test results and facilitates a **single** location for manual and automated test execution reporting.
 
 
 ## Features
-* Dynamically construct API Requests for common third-party Test Management Tools.
+* Dynamically construct API Requests for common third-party Test Management Tools
 * Easy to use
 * High level of Customization
 * Works with any Java Framework
@@ -26,8 +25,8 @@ TestmanaJ's detailed and customizable data-driven properties *save the user time
 
 Ensure you have met the following minimum requirements:
 
-* You have installed atleast <a href="https://maven.apache.org/download.cgi" > Maven 3.5 </a> or higher
-* You have installed atleast <a href="https://www.oracle.com/java/technologies/javase-downloads.html" > Java 8 </a> or higher
+* You have installed at least <a href="https://maven.apache.org/download.cgi" > Maven 3.5 </a> or higher
+* You have installed at least <a href="https://www.oracle.com/java/technologies/javase-downloads.html" > Java 8 </a> or higher
 * You use an IDE
 
 
@@ -37,7 +36,7 @@ To install TestManaJ, follow these steps:
 
 * Download the jar file from the GitHub repository.
 * Import the Jar into your project's IDE. You may also reference the JAR file into your `pom.xml`, or any other method of your choosing.
-* Finally, download the ALM resources folder and place on your local. This directory can be placed anywhere on your native project or windows explorer.
+* Finally, download the resources folder and place on your local. This directory can be placed anywhere on your native project or windows explorer. 
 
 
 ## Configuring TestmanaJ
@@ -111,8 +110,18 @@ Below is a list of test run, and run step properties available for setting:
 
 </table>
 
-## Usage
-Below you will find an example of a hashmap that will pass the `ExecuteApp` class to the test managment tool of your choosing, it is important to note that though this is a hardcoded example, you will generate the hashmaps dynamically from your framework. 
+At bare minimum we recommend to: 
+* 
+*
+*
+
+
+## Executing in TestmanaJ
+* This is as simple as calling the ExecuteApp method. Initially, we recommend to validate results in your third-party test management tool.
+
+
+## Usage Example
+Below you will find an example of a hashmap that will pass the `ExecuteApp` class to the test management tool of your choosing, it is important to note that though this is a hardcoded example, you will generate the hashmaps dynamically from your framework. 
 
 ```java
 
@@ -139,27 +148,27 @@ Below you will find an example of a hashmap that will pass the `ExecuteApp` clas
         steps.put("Step 2", stepProperties);
        
 
-        String almResoucesPath = SystemUtils.getUserDir().toString();
+        String resoucesPath = SystemUtils.getUserDir().toString();
 
-        updateALMForTestCase(testCaseName, steps, runProperties, almResoucesPath);
+        updateTestCase(testCaseName, steps, runProperties, resoucesPath);
    }
 
-public static void updateALMForTestCase(String testCaseName, LinkedHashMap<String, 
+public static void updateTestCase(String testCaseName, LinkedHashMap<String, 
 LinkedHashMap<String, String>> steps, LinkedHashMap<String, String> runProperties, 
-String almResourcesPath) throws Exception {
-      App executeApp = new App(almResourcesPath);
-      executeApp.updateTestRun(testCaseName, steps, runProperties);
+String resourcesPath) throws Exception {
+      App executeApp = new App(resourcesPath);
+      executeApp.updateTestResult(testCaseName, steps, runProperties);
    }
 
 ```
 
-Below you will find an example of a dynamically integrated hashmap using bdd that will pass the `ExecuteApp` class to ALM.
+Below you will find an example of a dynamically integrated hashmap using bdd that will pass the `ExecuteApp` class to test management tool.
 
 Initally, this is the setup creating the different objects and variables needed. 
 
 ```java
-public class ALMHooks {
-    Logger logger = Logger.getLogger(ALMHooks.class.getName());
+public class Hooks {
+    Logger logger = Logger.getLogger(Hooks.class.getName());
 
       LinkedHashMap<String, String> runProperties = new LinkedHashMap<>();
       LinkedHashMap<String, LinkedHashMap<String, String>> steps = new LinkedHashMap<>();
@@ -172,18 +181,18 @@ int c=0;
       String errors = "";
 
 
-      public String deploy_alm_connector=GlobalProperties.getConfigProperties().getProperty("deploy_alm_connector").toLowerCase();
+      public String deploy_connector=GlobalProperties.getConfigProperties().getProperty("deploy_connector").toLowerCase();
  ```
- These two functions add proprerties to a step (date, time) and add properties to a run (date, time)
+ These two functions add properties to a step (date, time) and add properties to a run (date, time)
  ```java
 
       public void addStepProperties(String key, String value) {
-                      if (deploy_alm_connector.equals("true")) {
+                      if (deploy_connector.equals("true")) {
                                       stepProperties.put(key, value);
                       }
       }
       public void addRunProperties(String key, String value){
-                      if (deploy_alm_connector.equals("true")) {
+                      if (deploy_connector.equals("true")) {
                                       runProperties.put(key, value);
                       }
       }
@@ -194,8 +203,8 @@ This function happens before every Test. Additonally, the file path needs to cha
 
 @Before
 public void beforeTest(Scenario scenario) throws Throwable {
-  if (GlobalProperties.getConfigProperties().getProperty("deploy_alm_connector").equalsIgnoreCase("true")) { // toggle for deploy data to ALM
-                  File file = new File("C:\\Users\\mb584ed\\Documents\\EY AUTO\\I&A\\Frameworks\\almConnector\\logs\\" + scenario.getName() + ".txt");
+  if (GlobalProperties.getConfigProperties().getProperty("deploy_connector").equalsIgnoreCase("true")) { // toggle for deploy data to reporting tool
+                  File file = new File("C:\\ Your file path);
                   passorfail = new ArrayList<String>();
                   int c=0;
                   runProperties = new LinkedHashMap<>();
@@ -261,7 +270,7 @@ It is important to note, the file path needs to change for the specific user in 
 @After
 public void afterTest(Scenario scenario) throws Throwable {
 
-    if (GlobalProperties.getConfigProperties().getProperty("deploy_alm_connector").equalsIgnoreCase("true")) {
+    if (GlobalProperties.getConfigProperties().getProperty("deploy_connector").equalsIgnoreCase("true")) {
                     try {
 
     //To change the status of all passed steps
@@ -280,7 +289,7 @@ public void afterTest(Scenario scenario) throws Throwable {
 
 
     if (scenario.isFailed()) {
-                    File file = new File("C:\\Users\\mb584ed\\Documents\\EY AUTO\\I&A\\Frameworks\\almConnector\\logs\\" + scenario.getName() + ".txt");
+                    File file = new File("C:\\ Your file path);
                     StringWriter error = new StringWriter();
                     e.printStackTrace(new PrintWriter(error));
                     String test = error.toString();
@@ -321,7 +330,7 @@ public void afterTest(Scenario scenario) throws Throwable {
                                 }
                 }
 }
-                //System.out.println(steps);
+                System.out.println(steps);
                 //Taking screenshot for Failed Step and adding to runProperties
                 String screenshotpath = ScreenShotMethods.captureScreenShot(OutputType.FILE, scenario);
                 scenario.embed(((TakesScreenshot) DriverUtil.getDefaultDriver()).getScreenshotAs(OutputType.BYTES), "image/png");
@@ -330,8 +339,8 @@ public void afterTest(Scenario scenario) throws Throwable {
                 }
 }
 String testCaseName = scenario.getName();
-//Deploying Test data to ALM
-ExecuteApp.updateALMForTestCase(testCaseName, steps, runProperties, System.getProperty("user.dir"));
+//Deploying Test data to test management tool
+ExecuteApp.updateTestCase(testCaseName, steps, runProperties, System.getProperty("user.dir"));
         }
     }
 }
@@ -339,13 +348,9 @@ ExecuteApp.updateALMForTestCase(testCaseName, steps, runProperties, System.getPr
 ```
 
 
-## Executing in TestmanaJ
-* The only thing left to do is call the method then validate results in your third-party test managment tool.
-
-
 ## Contributing to TestmanaJ
 
-To contribute to TestManaJ, follow these steps:
+To contribute to TestmanaJ, follow these steps:
 
 1. Fork this repository.
 2. Create a branch: `git checkout -b <branch_name>`.
@@ -360,7 +365,8 @@ Alternatively see the GitHub documentation on [creating a pull request](https://
 Thanks to the following people who have contributed to this project:
 
 * [@sethmwatson](https://github.com/sethmwatson) 📖
-* Teddy Gajewski 🐛📖
+* Manjunath Purad 🐛
+* Teddy Gajewski 🐛
 * Justin Hanke 🐛
 
 You might want to consider using something like the [All Contributors](https://github.com/all-contributors/all-contributors) specification and its [emoji key](https://allcontributors.org/docs/en/emoji-key).
@@ -371,6 +377,15 @@ You might want to consider using something like the [All Contributors](https://g
 If you have absolutely any questions or concerns do not hesitate to contact our support team.  
 
  EY_NGeTAF_Support.GID@ey.net --->
+ 
+ 
+## Agenda
+
+* Evaluate Architecture to support additional test-management tools
+* Increase Branch Coverage for Unit Testing
+* Expand documentation via Github Wiki
+
+
 
 ## License
 
