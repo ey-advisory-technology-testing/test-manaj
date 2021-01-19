@@ -266,6 +266,7 @@ public void afterStep(Scenario scenario) throws Throwable {
 
 ```
 It is important to note, the file path needs to change for the specific user in order to save the log file created. Likewise, in afterTest if the scenario failed the error messages will be written to the file specified in the file path. Additonally, it will capture a screenshot of the failed step and adds it to the run properties. 
+
 ```java
 @After
 public void afterTest(Scenario scenario) throws Throwable {
@@ -347,7 +348,6 @@ ExecuteApp.updateTestCase(testCaseName, steps, runProperties, System.getProperty
 
 ```
 
-
 ## Contributing to TestmanaJ
 
 To contribute to TestmanaJ, follow these steps:
@@ -382,11 +382,13 @@ If you have absolutely any questions or concerns do not hesitate to contact our 
 ## Agenda
 
 * Evaluate Architecture to support additional test-management tools
-* Increase Branch Coverage for Unit Testing
+* Increase Unit Test Coverage
+    * method uploadAttachment
+    * method uploadAttachmentToStep
 * Expand documentation via Github Wiki
 
 
 
-## License
 
-This project uses the following license: [CC0](<link>)
+
+ 
