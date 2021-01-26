@@ -38,8 +38,8 @@ If using ALM, open your resources folder and enter into the configuration.proper
 
 At bare minimum we recommend to: 
  * Fill out configuration.properties
- * Add name & test-instance to test-run.properties
- * Add test-run-id to test-run-step.properties
+ * Add name, test-instance, testcycl-id, cycle-id, test-id, subtype-id, status and owner to test-run.properties
+ * Add test-run-id and TestRunSteps to test-run-step.properties
 
 Below is a list of test run, and run step properties available for setting, if using ALM:
 
