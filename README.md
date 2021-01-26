@@ -1,15 +1,11 @@
 # TestmanaJ
-<!---##
+
 ![GitHub repo size](https://img.shields.io/github/repo-size/scottydocs/README-template.md)
 ![GitHub contributors](https://img.shields.io/github/contributors/scottydocs/README-template.md)
---->
-
-
 
 TestmanaJ is a automated connector utility that injects test results into common test management tools.
 
 TestmanaJ's detailed and customizable data-driven properties *save the user time* in manually uploading test results and facilitates a **single** location for manual and automated test execution reporting.
-
 
 ## Features
 * Dynamically construct API Requests for common third-party Test Management Tools
@@ -21,26 +17,31 @@ TestmanaJ's detailed and customizable data-driven properties *save the user time
 * Fast Execution
 
 
-## Before you begin
-
-Ensure you have met the following minimum requirements:
+## Requirements
 
 * You have installed at least <a href="https://maven.apache.org/download.cgi" > Maven 3.5 </a> or higher
 * You have installed at least <a href="https://www.oracle.com/java/technologies/javase-downloads.html" > Java 8 </a> or higher
-* You use an IDE
 
 
 ## Installing TestmanaJ
 
-To install TestManaJ, follow these steps:
+To install TestmanaJ, follow these steps:
 
 * Download the jar file from the GitHub repository.
 * Import the Jar into your project's IDE. You may also reference the JAR file into your `pom.xml`, or any other method of your choosing.
-* Finally, download the resources folder and place on your local. This directory can be placed anywhere on your native project or windows explorer. 
+* Download the resources folder and place on your local. This directory can be placed anywhere on your native project or windows explorer. 
 
 
 ## Configuring TestmanaJ
-Below is a list of test run, and run step properties available for setting:
+
+If using ALM, open your resources folder and enter into the configuration.properties file. There you can route your ALM credentials into TestmanaJ. 
+
+At bare minimum we recommend to: 
+ * Fill out configuration.properties
+ * Add name & test-instance to test-run.properties
+ * Add test-run-id to test-run-step.properties
+
+Below is a list of test run, and run step properties available for setting, if using ALM:
 
 
 <table>
@@ -110,10 +111,6 @@ Below is a list of test run, and run step properties available for setting:
 
 </table>
 
-At bare minimum we recommend to: 
-* 
-*
-*
 
 
 ## Executing in TestmanaJ
@@ -181,7 +178,9 @@ int c=0;
       String errors = "";
 
 
-      public String deploy_connector=GlobalProperties.getConfigProperties().getProperty("deploy_connector").toLowerCase();
+      public String deploy_connector=GlobalProperties.getConfigProperties()
+                                                     .getProperty("deploy_connector")
+                                                     .toLowerCase();
  ```
  These two functions add properties to a step (date, time) and add properties to a run (date, time)
  ```java
@@ -203,12 +202,16 @@ This function happens before every Test. Additonally, the file path needs to cha
 
 @Before
 public void beforeTest(Scenario scenario) throws Throwable {
-  if (GlobalProperties.getConfigProperties().getProperty("deploy_connector").equalsIgnoreCase("true")) { // toggle for deploy data to reporting tool
+  if (GlobalProperties.getConfigProperties().getProperty("deploy_connector")
+                                            .equalsIgnoreCase("true")) { 
+
+// toggle for deploy data to reporting tool
                   File file = new File("C:\\ Your file path);
                   passorfail = new ArrayList<String>();
                   int c=0;
                   runProperties = new LinkedHashMap<>();
-                  //Format data to put into runProperties
+
+//Format data to put into runProperties
                   SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                   Date date = new Date();
                   String DT = formatter.format(date);
@@ -217,26 +220,30 @@ public void beforeTest(Scenario scenario) throws Throwable {
                   runProperties.put("execution-time", DateTime[1]);
                   ArrayList<Object> arlist = new ArrayList<Object>();
                   ArrayList<String> teststeps = new ArrayList<String>();
-                  //Accessing fields to get step name/Description to add into Steps Hashmap
+
+//Accessing fields to get step name/Description to add into Steps Hashmap
                   Object cases = FieldUtils.readField(scenario, "testCase", true);
                   Object steps_all = FieldUtils.readField(cases, "testSteps", true);
                   for (Object o : (ArrayList) steps_all) {
                                   arlist.add(FieldUtils.readField(o, "step", true));
                   }
                   for (Object stepin : (ArrayList<Object>) arlist) {
-                                  teststeps.add(FieldUtils.readField(stepin, "text", true).toString());
+                                  teststeps.add(FieldUtils
+                                           .readField(stepin, "text", true)
+                                           .toString());
                   }
-
-                  //Loop to add the data into Step hash map using step properties
+                  
+//Loop to add the data into Step hash map using step properties
                   for (int i = 0; i < teststeps.size(); i++) {
 
                                   stepProperties = new LinkedHashMap<>();
 
+//Format data to put into stepProperties
                                   stepProperties.put("description", teststeps.get(i));
                                   stepProperties.put("status", "No Run"); //Default status- No run
                                   steps.put("Step " + (i + 1), stepProperties);
-                   }
-                  }
+        }
+    }
 }
 
 @BeforeStep
@@ -250,12 +257,12 @@ public void beforeStep(Scenario scenario) throws Throwable {
                 DateAndTime.put("execution-time", DateTime1[1]);
                 if(steps.containsKey("Steps "+(c+1))){
                     steps.get("Steps "+(c+1)).putAll(DateAndTime);
- }
+    }
                 c++;
 }
                 
 ```
-After the step is executed, the status of "pass" or "fail" is returned from your third-party test managment tool and added to an array list. 
+After the step is executed, the status of "pass" or "fail" is returned from your third-party test management tool and added to an array list. 
 ```java
 
 @AfterStep
@@ -271,23 +278,30 @@ It is important to note, the file path needs to change for the specific user in 
 @After
 public void afterTest(Scenario scenario) throws Throwable {
 
-    if (GlobalProperties.getConfigProperties().getProperty("deploy_connector").equalsIgnoreCase("true")) {
-                    try {
+    if (GlobalProperties.getConfigProperties()
+                        .getProperty("deploy_connector")
+                        .equalsIgnoreCase("true")) {
+    try {
 
     //To change the status of all passed steps
-    if (scenario.getStatus().toString().equals("PASSED")) {
+    if (scenario.getStatus()
+                .toString()
+                .equals("PASSED")) {
+
                     for (int i = 0; i < passorfail.size(); i++) {
                                     if (passorfail.get(i).equals("PASSED")) {
                                                     passorfail.set(i, "Done");
                                                     steps.get("Step " + (i + 1)).put("status", "Passed");
-                                    }
-                    }
-    } else {
+            }
+        }
+    } 
+
+else {
                     //triggering exception for when status is Failed
                     throw new Exception();
     }
-} catch (Exception e) {
 
+} catch (Exception e) {
 
     if (scenario.isFailed()) {
                     File file = new File("C:\\ Your file path);
