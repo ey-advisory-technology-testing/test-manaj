@@ -1,6 +1,7 @@
 package com.ey.beans;
 
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -38,7 +39,7 @@ public class TestSetBean {
 		this.entity = new Entity();
 		this.setType("test-set");
 		this.fields = new ArrayList<Field>();
-		this.reader = new PropertyReader(App.getResourcesFilePath() + "\\resources\\test-set.properties");
+		this.reader = new PropertyReader(App.getResourcesFilePath() + FileSystems.getDefault().getSeparator() + App.getConfigFileRoot() + "\\test-set.properties");
 	}
 
 	/**

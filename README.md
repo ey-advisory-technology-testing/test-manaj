@@ -153,7 +153,7 @@ Below you will find an example of a hashmap that will pass the `ExecuteApp` clas
 public static void updateTestCase(String testCaseName, LinkedHashMap<String, 
 LinkedHashMap<String, String>> steps, LinkedHashMap<String, String> runProperties, 
 String resourcesPath) throws Exception {
-      App executeApp = new App(resourcesPath);
+      App executeApp = new App(resourcesPath,"resources\\");/
       executeApp.updateTestResult(testCaseName, steps, runProperties);
    }
 

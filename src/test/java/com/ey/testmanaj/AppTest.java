@@ -227,12 +227,12 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/tests/2523")
 
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
                 )
                 .respond(
@@ -251,7 +251,7 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameters(
 
                                         new Parameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/tests/?query={name['Demo Test1']}")
@@ -259,7 +259,7 @@ public class AppTest {
                                 )
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
                 )
                 .respond(
@@ -320,14 +320,14 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameters(
 
                                         new Parameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/test-instances/?query={cycle-id[501]"),
                                         new Parameter("test-id[2523]}", "")
                                 )
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
                 )
                 .respond(
@@ -344,13 +344,13 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("POST")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withBody("<Entity Type=\"test-instance\"><ChildrenCount>0</ChildrenCount><Fields><Field Name=\"test-id\"><Value>2523</Value></Field><Field Name=\"subtype-id\"><Value>hp.qc.test-instance.MANUAL</Value></Field><Field Name=\"cycle-id\"><Value>501</Value></Field><Field Name=\"test-instance\"><Value>1</Value></Field><Field Name=\"order-id\"><Value>1</Value></Field><Field Name=\"cycle\"><Value>1</Value></Field><Field Name=\"status\"><Value>Not Completed</Value></Field></Fields><RelatedEntities/></Entity>")
                                 .withQueryStringParameters(
                                         new Parameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/test-instances")
                                 )
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
                 )
                 .respond(
@@ -467,7 +467,7 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameters(
 
                                         new Parameter("parent-id[21]}", ""),
@@ -476,7 +476,7 @@ public class AppTest {
                                 )
                                 .withHeaders(
                                         new Header("Accept-Encoding", enc),
-                                        new Header("Cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("Cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
                 )
                 .respond(
@@ -494,12 +494,12 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("POST")
-                                .withPath("/qcbin/")
-                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/test-sets")
+                                .withPath("/qcbin/rest/domains/TRAINING/projects/ALM_Sample/test-sets")
+//                                .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/test-sets")
                                 .withBody("<Entity Type=\"test-set\"><Fields><Field Name=\"subtype-id\"><Value>hp.qc.test-set.default</Value></Field><Field Name=\"name\"><Value>2BrandNewTestSet3</Value></Field><Field Name=\"parent-id\"><Value>21</Value></Field><Field Name=\"status\"><Value></Value></Field></Fields></Entity>")
                                 .withHeaders(
                                         new Header("content-type", "application/xml"),
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
                 )
                 .respond(
@@ -515,11 +515,11 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("PUT")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532")
                                 .withBody("<Entity Type=\"run\"><Fields><Field Name=\"attachment\"><Value>Y</Value></Field><Field Name=\"comments\"><Value>This is a comment</Value></Field><Field Name=\"status\"><Value>Failed</Value></Field></Fields></Entity>")
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
 
                                 )
 
@@ -541,11 +541,11 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("POST")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
                                 .withBody("<Entity Type=\"run-step\"><Fields><Field Name=\"name\"><Value>Step 1</Value></Field><Field Name=\"status\"><Value>Passed</Value></Field><Field Name=\"description\"><Value>Given I navigate to www.google.com</Value></Field><Field Name=\"execution-time\"><Value>14:38:14</Value></Field></Fields></Entity>")
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
 
                                 )
 
@@ -565,11 +565,11 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("POST")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
                                 .withBody("<Entity Type=\"run-step\"><Fields><Field Name=\"name\"><Value>Step 2</Value></Field><Field Name=\"status\"><Value>Passed</Value></Field><Field Name=\"description\"><Value>Given I enter text search into search.bar</Value></Field><Field Name=\"expected\"><Value>Google Home Page Should Load</Value></Field></Fields></Entity>")
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
 
                                 )
 
@@ -589,7 +589,7 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("POST")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
                                 .withBody("<Entity Type=\"run-step\"><Fields><Field Name=\"name\"><Value>Step 3</Value></Field><Field Name=\"status\"><Value>Failed</Value></Field><Field Name=\"description\"><Value>Then google.results are displayed</Value></Field><Field Name=\"actual\"><Value>Exception in thread \"main\" java.util.NoSuchElementException\n" +
                                         "at java.util.Scanner.throwFor(Scanner.java:838)\n" +
@@ -598,7 +598,7 @@ public class AppTest {
                                         "at java.util.Scanner.nextInt(Scanner.java:2050)\n" +
                                         "at Addition.main(Addition.java:16)</Value></Field><Field Name=\"attachment\"><Value>Y</Value></Field></Fields></Entity>")
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
 
                                 )
 
@@ -619,11 +619,11 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("POST")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
                                 .withBody("<Entity Type=\"run-step\"><Fields><Field Name=\"name\"><Value>Step 4</Value></Field><Field Name=\"status\"><Value>No Run</Value></Field><Field Name=\"description\"><Value>Then google.logo is displayed</Value></Field><Field Name=\"execution-date\"><Value>2009-01-27</Value></Field></Fields></Entity>")
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
 
                                 )
 
@@ -643,11 +643,11 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("POST")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps")
                                 .withBody("<Entity Type=\"run-step\"><Fields><Field Name=\"name\"><Value>Step 5</Value></Field><Field Name=\"status\"><Value>No Run</Value></Field><Field Name=\"description\"><Value>Then I click google.home</Value></Field></Fields></Entity>")
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
 
                                 )
 
@@ -667,11 +667,11 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps/")
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
 
                 )
@@ -693,12 +693,12 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("POST")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs")
-                                .withBody("<Entity Type=\"run\"><Fields><Field Name=\"test-id\"><Value>2523</Value></Field><Field Name=\"owner\"><Value>manjunath.purad</Value></Field><Field Name=\"subtype-id\"><Value>hp.qc.run.MANUAL</Value></Field><Field Name=\"cycle-id\"><Value>501</Value></Field><Field Name=\"test-instance\"><Value>1</Value></Field><Field Name=\"name\"><Value>Demo Test1</Value></Field><Field Name=\"testcycl-id\"><Value>1956</Value></Field><Field Name=\"status\"><Value>Not Completed</Value></Field></Fields></Entity>")
+                                .withBody("<Entity Type=\"run\"><Fields><Field Name=\"test-id\"><Value>2523</Value></Field><Field Name=\"owner\"><Value>test.username</Value></Field><Field Name=\"subtype-id\"><Value>hp.qc.run.MANUAL</Value></Field><Field Name=\"cycle-id\"><Value>501</Value></Field><Field Name=\"test-instance\"><Value>1</Value></Field><Field Name=\"name\"><Value>Demo Test1</Value></Field><Field Name=\"testcycl-id\"><Value>501</Value></Field><Field Name=\"status\"><Value>Not Completed</Value></Field></Fields></Entity>")
 
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW"),
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;"),
                                         new Header(CONTENT_TYPE.toString(), "application/xml")
                                 )
                 )
@@ -860,11 +860,11 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("DELETE")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps/1001")
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
 
                 )
@@ -883,11 +883,11 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("DELETE")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/run-steps/1002")
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
 
                 )
@@ -907,13 +907,13 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameters(
                                         new Parameter("parent-id['-1']}", ""),
                                         new Parameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/test-set-folders/?query={name['Root']")
                                 )
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
                 )
                 .respond(
@@ -970,13 +970,13 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameters(
                                         new Parameter("parent-id['0']}", ""),
                                         new Parameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/test-set-folders/?query={name['NEXTGEN_ETAF_DEMO']")
                                 )
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
                 )
                 .respond(
@@ -1033,10 +1033,10 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/attachments")
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
 
                                 )
                 )
@@ -1059,12 +1059,12 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("POST")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/runs/3532/attachments")
 
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW"),
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;"),
                                         new Header("content-type", "application/octet-stream"),
                                         new Header("slug", "jpg-vs-jpeg-file-formats_1.jpg")
                                 )
@@ -1217,7 +1217,7 @@ public class AppTest {
 
     @Test(expected = Test.None.class)
     public void getTestSet() throws IOException, ConfigurationException, ParserConfigurationException, SAXException {
-        app.getTestSet(";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW");
+        app.getTestSet("JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;");
     }
 
     @Test
@@ -1408,7 +1408,7 @@ public class AppTest {
 
     @Test(expected = HttpResponseException.class)
     public void getTestsByNameExceptionTest() throws Exception {
-        app.getTestsByName("test123");
+        app.getTestsByName("Test123");
     }
 
 
@@ -1668,13 +1668,13 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameters(
                                         new Parameter("parent-id['-1']}", ""),
                                         new Parameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/test-set-folders/?query={name['Root']")
                                 )
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
                 )
                 .respond(
@@ -1697,13 +1697,13 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameters(
                                         new Parameter("parent-id['0']}", ""),
                                         new Parameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/test-set-folders/?query={name['NEXTGEN_ETAF_DEMO']")
                                 )
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
                 )
                 .respond(
@@ -1720,34 +1720,6 @@ public class AppTest {
                                         "    </Entity>\n" +
                                         "</Entities>")
                 );
-
-        //getTestSet mock
-        this.mockServer
-                .when(
-                        request()
-                                .withMethod("GET")
-                                .withPath("/qcbin/")
-                                .withQueryStringParameters(
-
-                                        new Parameter("parent-id[21]}", ""),
-                                        new Parameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/test-sets/?query={name['2BrandNewTestSet3']")
-
-                                )
-                                .withHeaders(
-                                        new Header("Accept-Encoding", enc),
-                                        new Header("Cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
-                                )
-                )
-                .respond(
-                        response()
-                                .withStatusCode(200)
-                                .withHeaders(
-                                        new Header(CONTENT_TYPE.toString(), "application/xml"),
-                                        new Header("connection", connection)
-                                )
-                                .withBody(testSetResponseXML)
-                );
-
 
         app.createTestSet();
     }
@@ -1802,12 +1774,12 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/tests/2523")
 
                                 .withHeaders(
                                         new Header("accept-encoding", enc),
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
                 )
                 .respond(
@@ -1826,14 +1798,14 @@ public class AppTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/qcbin/")
+                                .withPath("/qcbin")
                                 .withQueryStringParameters(
 
                                         new Parameter("login-form-required", "y/rest/domains/TRAINING/projects/ALM_Sample/test-instances/?query={cycle-id[501]"),
                                         new Parameter("test-id[2523]}", "")
                                 )
                                 .withHeaders(
-                                        new Header("cookie", ";JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
+                                        new Header("cookie", "JSESSIONID=2By8LOhBmaW5nZXJwcmludCIlMDAzMW;")
                                 )
                 )
                 .respond(

@@ -21,6 +21,8 @@ public class BuildURL {
 	
 	private static PropertyReader propReader;
 
+	private static String login_required_string;
+
 	/**
 	 * Sets ALM resources path, base url, domain and project.
 	 *
@@ -31,6 +33,12 @@ public class BuildURL {
 		BuildURL.baseURL = propReader.readValue("baseURL");
 		BuildURL.domain = propReader.readValue("domain");
 		BuildURL.project = propReader.readValue("project");
+
+		if(propReader.readValue("login_form_required").equalsIgnoreCase("Y")){
+			login_required_string = "?login-form-required=y";
+		}else{
+			login_required_string = "";
+		}
 	}
 
 	/**
@@ -40,7 +48,7 @@ public class BuildURL {
 	 */
 	public static String getAuthenticationURL() {
 
-		return baseURL + "authentication-point/authenticate";
+		return baseURL + "/authentication-point/authenticate";
 	}
 
 	/**
@@ -50,7 +58,7 @@ public class BuildURL {
 	 */
 	public static String getCheckAuthentication() {
 
-		return baseURL + "?login-form-required=y/rest/is-authenticated";
+		return baseURL + login_required_string + "/rest/is-authenticated";
 	}
 
 	/**
@@ -86,6 +94,7 @@ public class BuildURL {
 		}
 	}
 
+
 	/**
 	 * Gets test set folder end point url.
 	 *
@@ -93,7 +102,7 @@ public class BuildURL {
 	 */
 	public static String getTestSetFolderURL() {
 
-		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/" + project + "/test-set-folders";
+		return baseURL + login_required_string + "/rest/domains/" + domain + "/projects/" + project + "/test-set-folders";
 	}
 
 	/**
@@ -103,7 +112,7 @@ public class BuildURL {
 	 */
 	public static String getTestRunURL() {
 
-		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/" + project + "/runs";
+		return baseURL + login_required_string + "/rest/domains/" + domain + "/projects/" + project + "/runs";
 	}
 
 	/**
@@ -113,7 +122,7 @@ public class BuildURL {
 	 */
 	public static String getProjectURL() {
 
-		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/" + project;
+		return baseURL + login_required_string + "/rest/domains/" + domain + "/projects/" + project;
 	}
 
 	/**
@@ -123,7 +132,7 @@ public class BuildURL {
 	 */
 	public static String getTestInstanceURL() {
 
-		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/" + project + "/test-instances";
+		return baseURL + login_required_string + "/rest/domains/" + domain + "/projects/" + project + "/test-instances";
 	}
 
 	/**
@@ -133,7 +142,7 @@ public class BuildURL {
 	 */
 	public static String createTestSet() {
 
-		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/"  + project + "/test-sets";
+		return baseURL + login_required_string + "/rest/domains/" + domain + "/projects/"  + project + "/test-sets";
 	}
 
 
@@ -144,7 +153,7 @@ public class BuildURL {
 	 */
 	public static String getCreateTestRunURL() {
 
-		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/" + project + "/runs";
+		return baseURL + login_required_string + "/rest/domains/" + domain + "/projects/" + project + "/runs";
 	}
 
 	/**
@@ -154,7 +163,7 @@ public class BuildURL {
 	 */
 	public static String getSessionURL() {
 
-		return baseURL + "rest/site-session";
+		return baseURL + "/rest/site-session";
 	}
 
 	/**
@@ -194,7 +203,7 @@ public class BuildURL {
 	 */
 	public static String getTestsURL() {
 
-		return baseURL + "?login-form-required=y/rest/domains/" + domain + "/projects/" + project + "/tests";
+		return baseURL + login_required_string + "/rest/domains/" + domain + "/projects/" + project + "/tests";
 	}
 
 }

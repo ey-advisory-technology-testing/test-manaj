@@ -34,39 +34,39 @@ public class BuildURLTest {
 
     @Test
     public void testGetCheckAuthentication() {
-        assertEquals("http://localhost:8888/qcbin/?login-form-required=y/rest/is-authenticated", BuildURL.getURL("isAuthenticated"));
+        assertEquals("http://localhost:8888/qcbin?login-form-required=y/rest/is-authenticated", BuildURL.getURL("isAuthenticated"));
     }
 
     @Test
     public void testGetTestSetFolderURL() {
-        assertEquals("http://localhost:8888/qcbin/?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/test-set-folders",
+        assertEquals("http://localhost:8888/qcbin?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/test-set-folders",
                 BuildURL.getURL("testSetFolder"));
     }
 
     @Test
     public void testGetTestRunURL() {
-        assertEquals("http://localhost:8888/qcbin/?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/runs", BuildURL.getURL("testRun"));
+        assertEquals("http://localhost:8888/qcbin?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/runs", BuildURL.getURL("testRun"));
     }
 
     @Test
     public void testGetProjectURL() {
-        assertEquals("http://localhost:8888/qcbin/?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample", BuildURL.getURL("baseProject"));
+        assertEquals("http://localhost:8888/qcbin?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample", BuildURL.getURL("baseProject"));
     }
 
     @Test
     public void testGetTestInstanceURL() {
-        assertEquals("http://localhost:8888/qcbin/?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/test-instances",
+        assertEquals("http://localhost:8888/qcbin?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/test-instances",
                 BuildURL.getURL("testInstance"));
     }
 
     @Test
     public void testCreateTestSet() {
-        assertEquals("http://localhost:8888/qcbin/?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/test-sets", BuildURL.getURL("createTestSet"));
+        assertEquals("http://localhost:8888/qcbin?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/test-sets", BuildURL.getURL("createTestSet"));
     }
 
     @Test
     public void testGetCreateTestRunURL() {
-        assertEquals("http://localhost:8888/qcbin/?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/runs", BuildURL.getURL("createTestRun"));
+        assertEquals("http://localhost:8888/qcbin?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/runs", BuildURL.getURL("createTestRun"));
     }
 
     @Test
@@ -94,7 +94,7 @@ public class BuildURLTest {
 
     @Test
     public void testGetTestsURL() {
-        assertEquals("http://localhost:8888/qcbin/?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/tests", BuildURL.getURL("testPlan"));
+        assertEquals("http://localhost:8888/qcbin?login-form-required=y/rest/domains/TRAINING/projects/ALM_Sample/tests", BuildURL.getURL("testPlan"));
     }
 }
 

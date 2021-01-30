@@ -167,9 +167,10 @@ public class App {
         ArrayList<String> headers = new ArrayList<>();
         Object a = getSession(sessionn, sessionXML, cookie);
         headers.addAll((ArrayList<String>) a);
+//        String c = cookie + ";";
         String c = "";
         for (String h : headers) {
-            if (!h.contains("JSESSIONID")) {
+            if (!h.contains("JSESSIONID") && !h.contains("LWSSO_COOKIE_KEY")) {
                 c = c + h + ";";
             }
         }
@@ -238,7 +239,6 @@ public class App {
             e.getLocalizedMessage();
 
             getTestSet(headers);
-            throw e;
         }
 
     }
@@ -277,7 +277,6 @@ public class App {
         } catch (Exception e) {
             e.getLocalizedMessage();
             throw e;
-
         }
 
     }
@@ -414,7 +413,7 @@ public class App {
         cookie = authenticate();
         String c;
         c = getHeader(cookie);
-        return c + ";" + cookie;
+        return cookie + ";" + c;
     }
 
     /**
@@ -705,9 +704,6 @@ public class App {
 
         GenericUrl url = BuildURL.getGenericURL("testPlan");
 
-        objTestInstance.writeValue("test-id", strTestID);
-        objTestRun.writeValue("test-id", strTestID);
-
         try {
             String strTemp = url.toString();
 
@@ -718,6 +714,9 @@ public class App {
             header.setHeader(headers, req);
 
             req.execute();
+
+            objTestInstance.writeValue("test-id", strTestID);
+            objTestRun.writeValue("test-id", strTestID);
         } catch (Exception e) {
             e.getLocalizedMessage();
             throw e;
@@ -740,8 +739,6 @@ public class App {
 
         GenericUrl url = BuildURL.getGenericURL("testPlan");
 
-        objTestRun.writeValue("name", strTestCaseName);
-
         try {
             String strTemp = url.toString();
 
@@ -756,6 +753,7 @@ public class App {
             InputStream iStream = res.getContent();
             String temp = CharStreams.toString(new InputStreamReader(iStream));
 
+            objTestRun.writeValue("name", strTestCaseName);
             objTestInstance.writeValue("test-id", getAttributeFromXMLResponse(temp, "id"));
             objTestRun.writeValue("test-id", getAttributeFromXMLResponse(temp, "id"));
         }

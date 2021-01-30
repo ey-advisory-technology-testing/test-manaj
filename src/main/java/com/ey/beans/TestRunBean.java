@@ -1,6 +1,7 @@
 package com.ey.beans;
 
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -39,7 +40,7 @@ public class TestRunBean {
 		this.entity = new Entity();
 		this.setType("run");
 		this.fields = new ArrayList<Field>();
-		reader = new PropertyReader(App.getResourcesFilePath() + "\\resources\\test-run.properties");
+		reader = new PropertyReader(App.getResourcesFilePath() + FileSystems.getDefault().getSeparator() + App.getConfigFileRoot() + "\\test-run.properties");
 	}
 
 	/**
