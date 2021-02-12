@@ -72,3 +72,4 @@ target/*
 /target/
 *.xd
 .DS_Store
+test-manaj.iml

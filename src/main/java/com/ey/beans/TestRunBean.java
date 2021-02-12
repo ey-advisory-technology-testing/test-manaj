@@ -40,7 +40,7 @@ public class TestRunBean {
 		this.entity = new Entity();
 		this.setType("run");
 		this.fields = new ArrayList<Field>();
-		reader = new PropertyReader(App.getResourcesFilePath() + FileSystems.getDefault().getSeparator() + App.getConfigFileRoot() + "\\test-run.properties");
+		reader = new PropertyReader(App.getResourcesFilePath() + FileSystems.getDefault().getSeparator() + App.getConfigFileRoot() + "/test-run.properties");
 	}
 
 	/**

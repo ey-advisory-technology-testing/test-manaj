@@ -39,7 +39,7 @@ public class TestSetBean {
 		this.entity = new Entity();
 		this.setType("test-set");
 		this.fields = new ArrayList<Field>();
-		this.reader = new PropertyReader(App.getResourcesFilePath() + FileSystems.getDefault().getSeparator() + App.getConfigFileRoot() + "\\test-set.properties");
+		this.reader = new PropertyReader(App.getResourcesFilePath() + FileSystems.getDefault().getSeparator() + App.getConfigFileRoot() + "/test-set.properties");
 	}
 
 	/**

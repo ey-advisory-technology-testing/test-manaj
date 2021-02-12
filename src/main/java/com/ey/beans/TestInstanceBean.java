@@ -45,7 +45,7 @@ public class TestInstanceBean {
 		this.entity = new Entity();
 		this.setType("test-instance");
 		this.fields = new ArrayList<Field>();
-		reader = new PropertyReader(App.getResourcesFilePath() + FileSystems.getDefault().getSeparator() + App.getConfigFileRoot() + "\\test-instance.properties");
+		reader = new PropertyReader(App.getResourcesFilePath() + FileSystems.getDefault().getSeparator() + App.getConfigFileRoot() + "/test-instance.properties");
 	}
 
 	/**
