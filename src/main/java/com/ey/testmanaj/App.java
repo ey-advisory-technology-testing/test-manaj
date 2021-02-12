@@ -143,7 +143,7 @@ public class App {
                 for(int i = 0; i < attachmentPaths.length; i++) {
                     Path p = Paths.get(attachmentPaths[i]);
                     String file = p.getFileName().toString();
-                    uploadAttachment(attachmentPaths[i].replace("\\" + file, ""), file);
+                    uploadAttachment(p.toString().replace(FileSystems.getDefault().getSeparator() + file, ""), file);
                 }
             }
 
@@ -167,7 +167,6 @@ public class App {
         ArrayList<String> headers = new ArrayList<>();
         Object a = getSession(sessionn, sessionXML, cookie);
         headers.addAll((ArrayList<String>) a);
-//        String c = cookie + ";";
         String c = "";
         for (String h : headers) {
             if (!h.contains("JSESSIONID") && !h.contains("LWSSO_COOKIE_KEY")) {
@@ -394,7 +393,7 @@ public class App {
             HttpHeaders headers = res.getHeaders();
             cookie = header.getCookies(headers);
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             throw e;
         }
         return cookie;
@@ -534,7 +533,7 @@ public class App {
 
             req.execute();
         } catch (HttpResponseException e) {
-            e.getLocalizedMessage();
+//            e.getLocalizedMessage();
             throw e;
 
         }
@@ -638,7 +637,7 @@ public class App {
                 for(int i = 0; i < attachmentPaths.length; i++) {
                     Path p = Paths.get(attachmentPaths[i]);
                     String file = p.getFileName().toString();
-                    uploadAttachmentToStep(attachmentPaths[i].replace("\\" + file, ""), file, stepID);
+                    uploadAttachmentToStep(p.toString().replace(FileSystems.getDefault().getSeparator() + file, ""), file, stepID);
                 }
             }
         } catch (HttpResponseException e) {
@@ -794,7 +793,7 @@ public class App {
         headers.set("Cookie", cookies);
         String boundary = "" + System.currentTimeMillis() ;
         final String LINE_FEED = "\r\n";
-        filePath = filePath + "\\" + fileName;
+        filePath = filePath + FileSystems.getDefault().getSeparator() + fileName;
         String attachmentsRunStepsURL = attachmentURL.toString();
 
         try
@@ -867,7 +866,7 @@ public class App {
         GenericUrl attachmentURL = new GenericUrl(strTemp + "/run-steps/" + stepID + "/attachments");
         String boundary = "" + System.currentTimeMillis() ;
         final String LINE_FEED = "\r\n";
-        filePath = filePath + "//" + fileName;
+        filePath = filePath + FileSystems.getDefault().getSeparator() + fileName;
         String attachmentsRunStepsURL = attachmentURL.toString();
 
         try
@@ -942,7 +941,7 @@ public class App {
         headers.setContentType("application/octet-stream");
         headers.set("Slug",fileName);
 
-        File f = new File(filePath + "\\" + fileName);
+        File f = new File(filePath + FileSystems.getDefault().getSeparator() + fileName);
 
         FileInputStream fis = new FileInputStream(f);
         byte[] fileData = new byte[(int) f.length()];
@@ -965,7 +964,7 @@ public class App {
             req.setHeaders(headers);
             req.execute();
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             throw e;
         }
 
