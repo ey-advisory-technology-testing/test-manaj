@@ -2,6 +2,7 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/scottydocs/README-template.md)
 ![GitHub contributors](https://img.shields.io/github/contributors/scottydocs/README-template.md)
+[![release](https://github.com/ey-advisory-technology-testing/test-manaj/actions/workflows/release.yml/badge.svg)](https://github.com/ey-advisory-technology-testing/test-manaj/actions/workflows/release.yml)
 
 TestmanaJ is a automated connector utility that injects test results into common test management tools.
 
