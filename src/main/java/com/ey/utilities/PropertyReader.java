@@ -46,7 +46,7 @@ public class PropertyReader {
 	 * Instantiates a new Property reader.
 	 */
 	public PropertyReader() {
-		this.propFile = "./src/main/resources/config.properties";
+		this.propFile = "./resources/configuration.properties";
 	}
 
 	/**

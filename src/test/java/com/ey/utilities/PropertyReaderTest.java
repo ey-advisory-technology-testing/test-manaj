@@ -29,19 +29,14 @@ public class PropertyReaderTest {
                         "testResources" + FileSystems.getDefault().getSeparator());
 
         BuildURL.setEnv();
-        setA.add("TestSetID");
-        setA.add("TestCycleID");
         setA.add("project");
-        setA.add("TestSetName");
-        setA.add("TestCaseName");
-        setA.add("TestRunID");
-        setA.add("TestID");
         setA.add("baseURL");
         setA.add("password");
-        setA.add("TestRunSteps");
         setA.add("domain");
-        setA.add("testSetParentID");
         setA.add("username");
+        setA.add("testSetFolderPath");
+        setA.add("always_create_new_tset_instance");
+        setA.add("login_form_required");
     }
 
     @Test

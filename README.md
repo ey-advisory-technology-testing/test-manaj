@@ -355,7 +355,8 @@ else {
 }
 String testCaseName = scenario.getName();
 //Deploying Test data to test management tool
-ExecuteApp.updateTestCase(testCaseName, steps, runProperties, System.getProperty("user.dir"));
+App app = new App(System.getProperty("user.dir"), "resources/");
+app.updateTestResult(testCaseName, steps, runProperties);
         }
     }
 }
