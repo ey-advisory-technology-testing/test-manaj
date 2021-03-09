@@ -8,6 +8,8 @@ TestmanaJ is a automated connector utility that injects test results into common
 
 TestmanaJ's detailed and customizable data-driven properties *save the user time* in manually uploading test results and facilitates a **single** location for manual and automated test execution reporting.
 
+*TestmanaJ version 1.0.0 has been tested using ALM version 14.5.*
+
 ## Features
 * Dynamically construct API Requests for common third-party Test Management Tools
 * Easy to use
@@ -117,9 +119,11 @@ Below is a list of test run, and run step properties available for setting, if u
 ## Executing in TestmanaJ
 * This is as simple as calling the ExecuteApp method. Initially, we recommend to validate results in your third-party test management tool.
 
+##Usage 
+
 
 ## Usage Example
-Below you will find an example of a hashmap that will pass the `ExecuteApp` class to the test management tool of your choosing, it is important to note that though this is a hardcoded example, you will generate the hashmaps dynamically from your framework. 
+Below you will find an example of a hashmap that will pass the `ExecuteApp` class to the test management tool of your choosing, it is important to note that though this is a hardcoded example, you will generate the hashmaps dynamically from your framework. This is just a foundational example.  
 
 ```java
 
@@ -207,7 +211,7 @@ public void beforeTest(Scenario scenario) throws Throwable {
                                             .equalsIgnoreCase("true")) { 
 
 // toggle for deploy data to reporting tool
-                  File file = new File("C:\\ Your file path);
+                  File file = new File(Your file path);
                   passorfail = new ArrayList<String>();
                   int c=0;
                   runProperties = new LinkedHashMap<>();
@@ -305,7 +309,7 @@ else {
 } catch (Exception e) {
 
     if (scenario.isFailed()) {
-                    File file = new File("C:\\ Your file path);
+                    File file = new File(Your file path);
                     StringWriter error = new StringWriter();
                     e.printStackTrace(new PrintWriter(error));
                     String test = error.toString();
