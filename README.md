@@ -123,7 +123,7 @@ Below is a list of test run, and run step properties available for setting, if u
 
 
 ## Usage Example
-Below you will find an example of a hashmap that will pass the `ExecuteApp` class to the test management tool of your choosing, it is important to note that though this is a hardcoded example, you will generate the hashmaps dynamically from your framework. This is just a foundational example.  
+Below you will find an example of a hashmap that will pass the `ExecuteApp` class to the test management tool of your choosing, it is important to note that though this is a hardcoded example, you will generate the hashmaps dynamically from your framework. This is just a foundational example.
 
 ```java
 
@@ -162,6 +162,48 @@ String resourcesPath) throws Exception {
       executeApp.updateTestResult(testCaseName, steps, runProperties);
    }
 
+```
+
+Steps to pass input to testmanaj
+
+The path where the configuration file is stored  
+```java
+String resourcesPath = SystemUtils.getUserDir().toString() + "resources/";
+```
+
+Create hashmap with step details
+```java
+LinkedHashMap<String, LinkedHashMap<String, String>> steps = new LinkedHashMap<>();
+
+LinkedHashMap<String, String> stepProperties = new LinkedHashMap<>();
+stepProperties.put("status", "Passed");
+stepProperties.put("description", "Given I navigate to www.google.com");
+stepProperties.put("execution-time","14:38:14");
+steps.put("Step 1", stepProperties);
+
+stepProperties = new LinkedHashMap<>();
+stepProperties.put("status", "Failed");
+stepProperties.put("description", "Then google.results are displayed");
+stepProperties.put("actual", "actual result");
+stepProperties.put("attachment", "screenshot path");
+steps.put("Step 2", stepProperties);
+```
+
+Create hashmap with test run details (Attachments and comments)
+```java
+LinkedHashMap<String, String> runProperties = new LinkedHashMap<>();
+runProperties.put("attachment", "screenshot path");
+runProperties.put("comments", "This is a comment");
+```
+
+Create reference object for testmanaj and pass the resource path
+```java
+App app = new App(resourcesPath);
+```
+
+Call updateTestResult method to update test result with all the test details
+```java
+app.updateTestResult(testCaseName, steps, runProperties);
 ```
 
 Below you will find an example of a dynamically integrated hashmap using bdd that will pass the `ExecuteApp` class to test management tool.
