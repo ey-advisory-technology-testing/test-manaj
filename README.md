@@ -8,7 +8,7 @@ TestmanaJ is a automated connector utility that injects test results into common
 
 TestmanaJ's detailed and customizable data-driven properties *save the user time* in manually uploading test results and facilitates a **single** location for manual and automated test execution reporting.
 
-*TestmanaJ version 1.0.0 has been tested using ALM version 14.5.*
+
 
 ## Features
 * Dynamically construct API Requests for common third-party Test Management Tools
@@ -19,6 +19,9 @@ TestmanaJ's detailed and customizable data-driven properties *save the user time
 * Prebuilt Implementations with Common Frameworks
 * Fast Execution
 
+##Test Management Capability 
+*TestmanaJ version 1.0.0 has been tested using ALM version 14.5.*
+Future releases may support other tools. 
 
 ## Requirements
 
