@@ -119,11 +119,10 @@ Below is a list of test run, and run step properties available for setting, if u
 ## Executing in TestmanaJ
 * This is as simple as calling the ExecuteApp method. Initially, we recommend to validate results in your third-party test management tool.
 
-##Usage 
+## Usage 
+In this section we will introduce the input expected from TestmanaJ, the format that is accepted and where to input that data. TestmanaJ is designed to be integrated with a diverse range of test frameworks, so it is up to the user to appropriately integrate TestmanaJ with their testing framework.
 
-
-## Usage Example
-Below you will find an example of a hashmap that will pass the `ExecuteApp` class to the test management tool of your choosing, it is important to note that though this is a hardcoded example, you will generate the hashmaps dynamically from your framework. This is just a foundational example.
+Below you will find a representative case showing a hashmap that will pass the `ExecuteApp` class, it is important to note that though this is a hardcoded example, you will generate the hashmaps dynamically from your framework. This is just a foundational example.
 
 ```java
 
@@ -164,49 +163,50 @@ String resourcesPath) throws Exception {
 
 ```
 
-Steps to pass input to testmanaj
+Using the representative case above let's list the sequence of steps that occur. Once again, this is a hardcoded example, your hashmaps will be generated dynamically from your framework. So lets begin assuming the hashmap above was pulled from your testing framework.
 
-The path where the configuration file is stored  
-```java
-String resourcesPath = SystemUtils.getUserDir().toString() + "resources/";
-```
+1. Argument to pass input to Testmanaj resourcesPath: Data type = String, Data = path where the configuration file is stored
 
-Create hashmap with step details
-```java
-LinkedHashMap<String, LinkedHashMap<String, String>> steps = new LinkedHashMap<>();
+    ```java
+    String resourcesPath = SystemUtils.getUserDir().toString() + "resources/";
+    ```
+2. Argument to Create hashmap with step details: Data type = LinkedHashMap<String, LinkedHashMap<String, String>>, Data = test step details
+    ```java
+    LinkedHashMap<String, LinkedHashMap<String, String>> steps = new LinkedHashMap<>();
+    
+    LinkedHashMap<String, String> stepProperties = new LinkedHashMap<>();
+    stepProperties.put("status", "Passed");
+    stepProperties.put("description", "Given I navigate to www.google.com");
+    stepProperties.put("execution-time","14:38:14");
+    steps.put("Step 1", stepProperties);
+    
+    stepProperties = new LinkedHashMap<>();
+    stepProperties.put("status", "Failed");
+    stepProperties.put("description", "Then google.results are displayed");
+    stepProperties.put("actual", "actual result");
+    stepProperties.put("attachment", "screenshot path");
+    steps.put("Step 2", stepProperties);
+    ```
 
-LinkedHashMap<String, String> stepProperties = new LinkedHashMap<>();
-stepProperties.put("status", "Passed");
-stepProperties.put("description", "Given I navigate to www.google.com");
-stepProperties.put("execution-time","14:38:14");
-steps.put("Step 1", stepProperties);
+3. Argument to create hashmap with test run details (Attachments and comments): Data Type = LinkedHashMap<String, String>, Data = runProperties 
+    ```java
+    LinkedHashMap<String, String> runProperties = new LinkedHashMap<>();
+    runProperties.put("attachment", "screenshot path");
+    runProperties.put("comments", "This is a comment");
+    ```
 
-stepProperties = new LinkedHashMap<>();
-stepProperties.put("status", "Failed");
-stepProperties.put("description", "Then google.results are displayed");
-stepProperties.put("actual", "actual result");
-stepProperties.put("attachment", "screenshot path");
-steps.put("Step 2", stepProperties);
-```
+4. Argument to create reference object for Testmanaj and pass the resource path
+    ```java
+    App app = new App(resourcesPath);
+    ```
 
-Create hashmap with test run details (Attachments and comments)
-```java
-LinkedHashMap<String, String> runProperties = new LinkedHashMap<>();
-runProperties.put("attachment", "screenshot path");
-runProperties.put("comments", "This is a comment");
-```
+5. Argument to call updateTestResult method to update test result with all the test details
+    ```java
+    app.updateTestResult(testCaseName, steps, runProperties);
+    ```
 
-Create reference object for testmanaj and pass the resource path
-```java
-App app = new App(resourcesPath);
-```
-
-Call updateTestResult method to update test result with all the test details
-```java
-app.updateTestResult(testCaseName, steps, runProperties);
-```
-
-Below you will find an example of a dynamically integrated hashmap using bdd that will pass the `ExecuteApp` class to test management tool.
+## Usage Example
+Building on top of the representative case explanation above, let us now leverage the example below that dynamically integrates hashmaps using bdd that will pass the `ExecuteApp` class to test management tool. Please look out for the comments introduced throughout this example in the code snippets that will highlight key ideas.
 
 Initally, this is the setup creating the different objects and variables needed. 
 
@@ -415,10 +415,10 @@ app.updateTestResult(testCaseName, steps, runProperties);
 To contribute to TestmanaJ, follow these steps:
 
 1. Fork this repository.
-2. Create a branch: `git checkout -b <branch_name>`.
-3. Make your changes and commit them: `git commit -m '<commit_message>'`
-4. Push to the original branch: `git push origin <project_name>/<location>`
-5. Create the pull request.
+2. Create a branch from master and name according to issue: `git checkout -b <branch_name>`.
+3. Make your changes and commit them (include concise comments about changes): `git commit -m '<commit_message>'`
+4. Create a pull request.
+5. The pull request is raised to signal that they think the task is complete and it is now ready for review. Upon our review we can approve, or request follow up modifications prior to us approving the merge.
 
 Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
