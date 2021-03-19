@@ -19,7 +19,7 @@ TestmanaJ's detailed and customizable data-driven properties *save the user time
 * Prebuilt Implementations with Common Frameworks
 * Fast Execution
 
-##Test Management Capability 
+## Test Management Capability 
 *TestmanaJ version 1.0.0 has been tested using ALM version 14.5.*
 Future releases may support other tools. 
 
