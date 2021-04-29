@@ -11,13 +11,11 @@ TestmanaJ's detailed and customizable data-driven properties *save the user time
 
 
 ## Features
-* Dynamically construct API Requests for common third-party Test Management Tools
-* Easy to use
-* High level of Customization
-* Works with any Java Framework
-* Detailed Reports made Easy
-* Prebuilt Implementations with Common Frameworks
-* Fast Execution
+* Easy to configure and integrate with any Java-based automation framework
+* Fully automated synchronization of execution results
+* Test or step-level results sync
+* Attachments such as screenshots or documents
+
 
 ## Test Management Capability 
 *TestmanaJ version 1.0.0 has been tested using ALM version 14.5.*
