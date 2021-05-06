@@ -7,6 +7,10 @@ on:
   push:
     branches:
       - master
+    paths:
+      - '/src/**'
+      - 'pom.xml'
+      - '.github/**'  
 jobs:
   test:
     runs-on: ${{ matrix.os }}
