@@ -23,8 +23,8 @@ Future releases may support other tools.
 
 ## Requirements
 
-* You have installed at least <a href="https://maven.apache.org/download.cgi" > Maven 3.5 </a> or higher
-* You have installed at least <a href="https://www.oracle.com/java/technologies/javase-downloads.html" > Java 8 </a> or higher
+* TestmanaJ needs at least <a href="https://maven.apache.org/download.cgi" > Maven 3.5 </a> or higher
+* TestmanaJ needs at least <a href="https://www.oracle.com/java/technologies/javase-downloads.html" > Java 8 </a> or higher
 
 
 ## Installing TestmanaJ
@@ -40,7 +40,7 @@ To install TestmanaJ, follow these steps:
 
 If using ALM, open your resources folder and enter into the configuration.properties file. There you can route your ALM credentials into TestmanaJ. 
 
-At bare minimum we recommend to: 
+At a bare minimum we recommend to: 
  * Fill out configuration.properties
  * Add name, test-instance, testcycl-id, cycle-id, test-id, subtype-id, status and owner to test-run.properties
  * Add test-run-id and TestRunSteps to test-run-step.properties
@@ -164,7 +164,7 @@ String resourcesPath) throws Exception {
 
 ```
 
-Using the representative case above let's list the sequence of steps that occur. Once again, this is a hardcoded example, your hashmaps will be generated dynamically from your framework. So lets begin assuming the hashmap above was pulled from your testing framework.
+Using the representative case above, let's list the sequence of steps that occur. Once again, this is a hardcoded example, your hashmaps will be generated dynamically from your framework. So lets begin assuming the hashmap above was pulled from your testing framework.
 
 1. Argument to pass input to Testmanaj resourcesPath: Data type = String, Data = path where the configuration file is stored
 
