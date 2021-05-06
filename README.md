@@ -11,7 +11,7 @@ TestmanaJ's detailed and customizable data-driven properties *save the user time
 
 
 ## Features
-* Easy to configure and integrate with any Java-based automation framework
+* Config-driven modular library to integrate with any Java-based automation framework
 * Fully automated synchronization of execution results
 * Test or step-level results sync
 * Attachments such as screenshots or documents
