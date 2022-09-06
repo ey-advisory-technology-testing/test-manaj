@@ -46,17 +46,16 @@ jobs:
         run: |
           echo version=v$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout | awk '{print $1}') >> $GITHUB_ENV
           echo version_title=Release v$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout | awk '{print $1}') >> $GITHUB_ENV
-
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy -Dregistry=https://maven.pkg.github.com/ey-advisory-technology-testing -Dtoken=${{ secrets.ACCESS_TOKEN }}
+        run: mvn deploy -DLICENSE_TOKEN=${{ secrets.TOOL_LICENSE }} -Dtoken=${{ secrets.ACCESS_TOKEN }}
 
       - name: Release Activities
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: v1.0.0
-          prerelease: true
-          title: Release v1.0.0
+          automatic_release_tag: "${{ env.version }}"
+          prerelease: false
+          title: "${{ env.version_title }}"
           files: |
             README.md
             **/*.jar
