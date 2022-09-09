@@ -47,7 +47,7 @@ jobs:
           echo version=v$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout | awk '{print $1}') >> $GITHUB_ENV
           echo version_title=Release v$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout | awk '{print $1}') >> $GITHUB_ENV
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy -DLICENSE_TOKEN=${{ secrets.TOOL_LICENSE }} -Dtoken=${{ secrets.ACCESS_TOKEN }}
+        run: mvn deploy -Dregistry=https://maven.pkg.github.com/ey-advisory-technology-testing -Dtoken=${{ secrets.ACCESS_TOKEN }}
 
       - name: Release Activities
         uses: "marvinpinto/action-automatic-releases@latest"
