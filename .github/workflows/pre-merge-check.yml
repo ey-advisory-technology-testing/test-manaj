@@ -54,4 +54,3 @@ jobs:
           name: TestmanaJ
           path: |
             README.md
-            target/*.jar

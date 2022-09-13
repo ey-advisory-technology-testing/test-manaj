@@ -9,22 +9,14 @@
 	<packaging>jar</packaging>
 
 	<name>test-manaj</name>
-	<developers>
-		<developer>
-			<email>manjunath.purad@gds.ey.com</email>
-			<name>Manju</name>
-			<organization>EY</organization>
-			<roles>
-				<role>Developer</role>
-			</roles>
-		</developer>
-	</developers>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<cucumber.version>4.2.6</cucumber.version>
+		<skipTests>false</skipTests>
 	</properties>
+
 	<distributionManagement>
 		<repository>
 			<id>github</id>
@@ -32,6 +24,7 @@
 			<url>https://maven.pkg.github.com/ey-advisory-technology-testing/test-manaj</url>
 		</repository>
 	</distributionManagement>
+
 	<organization>
 		<name>EY LLP</name>
 		<url>http://ey.com</url>
@@ -76,7 +69,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>27.0.1-jre</version>
+			<version>29.0-jre</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
 		<dependency>
@@ -118,29 +111,23 @@
 			<version>5.11.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.jacoco</groupId>
-			<artifactId>jacoco-maven-plugin</artifactId>
-			<version>0.8.5</version>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
 
 	<build>
-		<pluginManagement><!-- lock down plugins versions to avoid using Maven
-				defaults (may be moved to parent pom) -->
+		<pluginManagement>
 			<plugins>
-				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
 				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>3.1.0</version>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+					<version>2.7</version>
+					<configuration>
+						<excludes>
+							<exclude>io.cucumber.*</exclude>
+						</excludes>
+						<rulesUri>file://${project.basedir}/src/test/resources/versions/ruleset.xml</rulesUri>
+					</configuration>
 				</plugin>
-				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
+
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.0</version>
@@ -149,50 +136,28 @@
 						<target>${maven.compiler.target}</target>
 					</configuration>
 				</plugin>
-<!--				<plugin>-->
-<!--					<groupId>org.jacoco</groupId>-->
-<!--					<artifactId>jacoco-maven-plugin</artifactId>-->
-<!--					<version>0.8.5</version>-->
-<!--					<executions>-->
-<!--					<execution>-->
-<!--						<id>instrument</id>-->
-<!--						<phase>process-test-classes</phase>-->
-<!--						<goals>-->
-<!--							<goal>instrument</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--					<execution>-->
-<!--					<id>restore-instrumented-classes</id>-->
-<!--					<phase>test</phase>-->
-<!--					<goals>-->
-<!--						<goal>restore-instrumented-classes</goal>-->
-<!--					</goals>-->
-<!--					</execution>-->
-<!--						<execution>-->
-<!--							&lt;!&ndash; Ensures that the code coverage report for unit tests is created-->
-<!--                           after unit tests have been run. &ndash;&gt;-->
-<!--							<id>post-unit-test</id>-->
-<!--							<phase>test</phase>-->
-<!--							<goals>-->
-<!--								<goal>report</goal>-->
-<!--							</goals>-->
-<!--							<configuration>-->
-<!--								&lt;!&ndash; Sets the output directory for the code coverage report. &ndash;&gt;-->
-<!--								<outputDirectory>$/jacoco</outputDirectory>-->
-<!--							</configuration>-->
-<!--						</execution>-->
-<!--					</executions>-->
-<!--				</plugin>-->
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>3.0.0-M3</version>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>3.1.1</version>
 					<configuration>
-						<systemPropertyVariables>
-							<jacoco-agent.destfile>$/jacoco.exec</jacoco-agent.destfile>
-						</systemPropertyVariables>
+						<configLocation>src/test/resources/checkstyle/google_checks.xml</configLocation>
+						<encoding>UTF-8</encoding>
+						<consoleOutput>false</consoleOutput>
+						<failsOnError>true</failsOnError>
+						<enableFilesSummary>true</enableFilesSummary>
+						<outputFile>${project.build.directory}/checkstyle/checkstyle-result.xml</outputFile>
+						<linkXRef>true</linkXRef>
 					</configuration>
+					<executions>
+						<execution>
+							<id>compile</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 
 				<plugin>
@@ -225,7 +190,7 @@
 											<limit>
 												<counter>COMPLEXITY</counter>
 												<value>COVEREDRATIO</value>
-												<minimum>0.10</minimum>
+												<minimum>0.80</minimum>
 											</limit>
 										</limits>
 									</rule>
@@ -234,25 +199,29 @@
 						</execution>
 					</executions>
 				</plugin>
-
-				<plugin>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>2.5.2</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.2</version>
-				</plugin>
-				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-
-				<plugin>
-					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>3.0.0</version>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.0.0-M3</version>
+					<configuration>
+						<skipTests>true</skipTests>
+						<forkCount>8</forkCount>
+					</configuration>
+					<executions>
+						<execution>
+							<id>unit-tests</id>
+							<phase>test</phase>
+							<goals>
+								<goal>test</goal>
+							</goals>
+							<configuration>
+								<skipTests>${skipTests}</skipTests>
+								<includes>
+									<include>**/*Test*.java</include>
+								</includes>
+							</configuration>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
