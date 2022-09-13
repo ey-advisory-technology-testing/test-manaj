@@ -1,12 +1,12 @@
-# TestmanaJ
+# TestManaJ
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/scottydocs/README-template.md)
 ![GitHub contributors](https://img.shields.io/github/contributors/scottydocs/README-template.md)
 [![release](https://github.com/ey-advisory-technology-testing/test-manaj/actions/workflows/release.yml/badge.svg)](https://github.com/ey-advisory-technology-testing/test-manaj/actions/workflows/release.yml)
 
-TestmanaJ is a automated connector utility that injects test results into common test management tools.
+TestManaJ is utility to integrate results information between any Java-based automation framework and any test management tool.
 
-TestmanaJ's detailed and customizable data-driven properties *save the user time* in manually uploading test results and facilitates a **single** location for manual and automated test execution reporting.
+TestManaJ's detailed and customizable data-driven properties *save the user time* in manually uploading test results and facilitates a **single** location for manual and automated test execution reporting.
 
 
 
@@ -18,27 +18,27 @@ TestmanaJ's detailed and customizable data-driven properties *save the user time
 
 
 ## Test Management Capability 
-*TestmanaJ version 1.0.0 has been tested using ALM version 14.5.*
+*TestManaJ version 1.0.0 has been tested using ALM version 14.5.*
 Future releases may support other tools. 
 
 ## Requirements
 
-* TestmanaJ needs at least <a href="https://maven.apache.org/download.cgi" > Maven 3.5 </a> or higher
-* TestmanaJ needs at least <a href="https://www.oracle.com/java/technologies/javase-downloads.html" > Java 8 </a> or higher
+* TestManaJ needs at least <a href="https://maven.apache.org/download.cgi" > Maven 3.5 </a> or higher
+* TestManaJ needs at least <a href="https://www.oracle.com/java/technologies/javase-downloads.html" > Java 8 </a> or higher
 
 
-## Installing TestmanaJ
+## Installing TestManaJ
 
-To install TestmanaJ, follow these steps:
+To install TestManaJ, follow these steps:
 
 * Download the jar file from the GitHub repository.
 * Import the Jar into your project's IDE. You may also reference the JAR file into your `pom.xml`, or any other method of your choosing.
 * Download the resources folder and place on your local. This directory can be placed anywhere on your native project or windows explorer. 
 
 
-## Configuring TestmanaJ
+## Configuring TestManaJ
 
-If using ALM, open your resources folder and enter into the configuration.properties file. There you can route your ALM credentials into TestmanaJ. 
+If using ALM, open your resources folder and enter into the configuration.properties file. There you can route your ALM credentials into TestManaJ. 
 
 At a bare minimum we recommend to: 
  * Fill out configuration.properties
@@ -117,11 +117,11 @@ Below is a list of test run, and run step properties available for setting, if u
 
 
 
-## Executing in TestmanaJ
+## Executing in TestManaJ
 * This is as simple as calling the ExecuteApp method. Initially, we recommend to validate results in your third-party test management tool.
 
 ## Usage 
-In this section we will introduce the input expected from TestmanaJ, the format that is accepted and where to input that data. TestmanaJ is designed to be integrated with a diverse range of test frameworks, so it is up to the user to appropriately integrate TestmanaJ with their testing framework.
+In this section we will introduce the input expected from TestManaJ, the format that is accepted and where to input that data. TestManaJ is designed to be integrated with a diverse range of test frameworks, so it is up to the user to appropriately integrate TestManaJ with their testing framework.
 
 Below you will find a representative case showing a hashmap that will pass the `ExecuteApp` class, it is important to note that though this is a hardcoded example, you will generate the hashmaps dynamically from your framework. This is just a foundational example.
 
@@ -411,9 +411,9 @@ app.updateTestResult(testCaseName, steps, runProperties);
 
 ```
 
-## Contributing to TestmanaJ
+## Contributing to TestManaJ
 
-To contribute to TestmanaJ, follow these steps:
+To contribute to TestManaJ, follow these steps:
 
 1. Fork this repository.
 2. Create a branch from master and name according to issue: `git checkout -b <branch_name>`.
