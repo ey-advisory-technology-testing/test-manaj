@@ -117,6 +117,44 @@ Below is a list of test run, and run step properties available for setting, if u
 </table>
 
 
+If using Xray, you will need to create a jar of the XrayInitializer class and import the jar into your project. You will need to call the class XrayInitializer in your after-scenario class and pass along the file path of these json files:
+
+1. Info.json - Containing your JIRA project parameters
+2. Authentication.json -  Containing JIRA credentials
+3. Multipart.json - Containing endpoints for Xray/JIRA integration
+4. File path to report directory where Cucumber json file gets generated after test execution
+5. List of files to attach
+
+You will then call the importTestExecutionResults method and pass in the files. 
+
+Example:
+
+```java
+    XrayInitializer xray = new XrayInitializer();
+
+        File authData = new File("./src/test/resources/authentication.json");
+        File multiPart = new File("./src/test/resources/executionMultipart.json");
+        File reportDir = new File("target/reports");
+        File infoJson = new File("./src/test/resources/info.json");
+        List<File> fileList = new ArrayList<>();
+
+        fileList.add(new File("./target/reports/cucumber-html-reports/overview-steps.html"));
+
+        try {
+            xray.importTestExecutionResults(authData,multiPart,reportDir,infoJson, fileList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
+```
+
+Before running your tests, be sure to tag each test case with the proper JIRA ID.
+
+
+
 
 ## Executing in TestManaJ
 * This is as simple as calling the ExecuteApp method. Initially, we recommend to validate results in your third-party test management tool.
